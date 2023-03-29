@@ -345,3 +345,6 @@ $RECYCLE.BIN/
 
 # pjt_dalnim_secret_key
 etc/pjt_dalnim_secret_key.txt
+
+# openweathermap_api_key
+etc/openweathermap_apikey.txt

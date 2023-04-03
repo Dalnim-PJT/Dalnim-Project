@@ -1,20 +1,23 @@
 from django.shortcuts import render
-from utils.weather import weather_json
+from utils.weather import weather_json, pm_json
 
 # Create your views here.
 
 def main(request):
     city_name = request.POST.get('city')
-    city = weather_json(city_name)
+    weather_api = weather_json(city_name)
+    pm_api = pm_json(city_name)
     context = {
-        'city': city,
-        'weather': city['weather'][0]['description'],
-        'temp': city['main']['temp'],
-        'feels_like': city['main']['feels_like'],
-        'temp_min': city['main']['temp_min'],
-        'temp_max': city['main']['temp_max'],
-        'humidity': city['main']['humidity'],
-        'icon': f'https://openweathermap.org/img/wn/{city["weather"][0]["icon"]}@2x.png',
+        'city': weather_api,
+        'weather': weather_api['weather'][0]['description'],
+        'temp': weather_api['main']['temp'],
+        'feels_like': weather_api['main']['feels_like'],
+        'temp_min': weather_api['main']['temp_min'],
+        'temp_max': weather_api['main']['temp_max'],
+        'humidity': weather_api['main']['humidity'],
+        'icon': f'https://openweathermap.org/img/wn/{weather_api["weather"][0]["icon"]}@2x.png',
+        'PM2_5': pm_api['list'][0]['components']['pm2_5'],
+        'PM10': pm_api['list'][0]['components']['pm10']
     }
 
     if city_name:

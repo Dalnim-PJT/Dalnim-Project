@@ -6,80 +6,120 @@
 {% block content %}
   <header>
     <nav>
-      <a href="#"><img src="/static/img/dalnim_logo_02_inner_color.png" alt="logo"></a>
-      <div class="nav--right">
-        <div>
-          <form action="" class="nav--right__margin">
-            <input type="search" class="main_color">
-            <button type="submit" class="nav--right__btn">
-              <span class="material-symbols-outlined icon__size">search</span>
+      <div class="width nav--in">
+        <a href="#"><img src="/static/img/dalnim_logo_02_inner_color.png" alt="logo"></a>
+        <div class="nav--right">
+          <div>
+            <form action="" class="nav--right__margin">
+              <input type="search" class="main_color">
+              <button type="submit" class="nav--right__btn">
+                <span class="material-symbols-outlined icon__size">search</span>
+              </button>
+            </form>
+          </div>
+          <div>
+            <a href="" class="nav--right__margin">Join</a>
+            <a href="" class="nav--right__margin">Login</a>
+            <button type="button" id="menuBtn" class="nav--right__btn">
+              <span class="material-symbols-outlined">menu</span>
             </button>
-          </form>
-        </div>
-        <div>
-          <a href="" class="nav--right__margin">Join</a>
-          <a href="" class="nav--right__margin">Login</a>
-          <button type="button" id="menuBtn" class="nav--right__btn">
-            <span class="material-symbols-outlined">menu</span>
-          </button>
-        </div>                    
-        <div>
-          <ul id="menu">
-            <li><a href="">문지수</a></li>
-            <li><a href="">소현섭</a></li>
-            <li><a href="">정미영</a></li>
-            <li><a href="">정소담</a></li>
-          </ul>
+          </div>                    
+          <div>
+            <ul id="menu">
+              <li><a href="">문지수</a></li>
+              <li><a href="">소현섭</a></li>
+              <li><a href="">정미영</a></li>
+              <li><a href="">정소담</a></li>
+            </ul>
+          </div>
         </div>
       </div>
     </nav>
   </header>
 
-  <article class="content_padding">
-    <div>
-      <img src="{{ icon }}" alt="">
-      {{ weather }}<br>
-      {{ temp }}°C<br>
-      체감온도 : {{ feels_like }}°C<br>
-      최저온도 : {{ temp_min }}°C<br>
-      최고온도 : {{ temp_max }}°C<br>
-      습도 : {{ humidity }}%
-    </div>
-    <form action="{% url 'infobases:main' %}" method="POST">
-      {% csrf_token %}
-      <label for="city">도시: </label>
-      <select name="city" id="city" onchange="this.form.submit()">
-        <option value="Seoul" {% if selected_city == 'Seoul' %}selected{% endif %}>서울</option>
-        <option value="Busan" {% if selected_city == 'Busan' %}selected{% endif %}>부산</option>
-        <option value="Daegu" {% if selected_city == 'Daegu' %}selected{% endif %}>대구</option>
-        <option value="Daejeon" {% if selected_city == 'Daejeon' %}selected{% endif %}>대전</option>
-        <option value="Gwangju" {% if selected_city == 'Gwangju' %}selected{% endif %}>광주</option>
-        <option value="Incheon" {% if selected_city == 'Incheon' %}selected{% endif %}>인천</option>
-        <option value="Jeju" {% if selected_city == 'Jeju' %}selected{% endif %}>제주</option>
-        <option value="london" {% if selected_city == 'london' %}selected{% endif %}>런던</option>
-        <option value="beijing" {% if selected_city == 'beijing' %}selected{% endif %}>베이징</option>
-        <option value="tokyo" {% if selected_city == 'tokyo' %}selected{% endif %}>도쿄</option>
-        <option value="bangkok" {% if selected_city == 'bangkok' %}selected{% endif %}>방콕</option>
-        <option value="sydney" {% if selected_city == 'sydney' %}selected{% endif %}>시드니</option>
-        <option value="toronto" {% if selected_city == 'toronto' %}selected{% endif %}>토론토</option>
-        <option value="new york" {% if selected_city == 'new york' %}selected{% endif %}>뉴욕</option>
-        <option value="Amsterdam" {% if selected_city == 'Amsterdam' %}selected{% endif %}>암스테르담</option>
-        <option value="Berlin" {% if selected_city == 'Berlin' %}selected{% endif %}>베를린</option>
-        <option value="Budapest" {% if selected_city == 'Budapest' %}selected{% endif %}>부다페스트</option>
-        <option value="Cairo" {% if selected_city == 'Cairo' %}selected{% endif %}>카이로</option>
-        <option value="Canberra" {% if selected_city == 'Canberra' %}selected{% endif %}>캔버라</option>
-        <option value="Dubai" {% if selected_city == 'Dubai' %}selected{% endif %}>두바이</option>
-        <option value="Rome" {% if selected_city == 'Rome' %}selected{% endif %}>로마</option>
-        <option value="Singapore" {% if selected_city == 'Singapore' %}selected{% endif %}>싱가포르</option>
-        <option value="Paris" {% if selected_city == 'Paris' %}selected{% endif %}>파리</option>
-        <option value="Manila" {% if selected_city == 'Manila' %}selected{% endif %}>마닐라</option>
-        <option value="Hong Kong" {% if selected_city == 'Hong Kong' %}selected{% endif %}>홍콩</option>
-        <option value="Hanoi" {% if selected_city == 'Hanoi' %}selected{% endif %}>하노이</option>   
-      </select>
-    </form>
+  <article class="width">
+    <section class="weather__container">
+      <div>
 
+      </div>
+      <div class="weather">
+        <div>
+          <img src="{{ icon }}" alt="">
+        </div>
+        <div>
+          <p>{{ weather }}</p>
+        </div>
+        <div>
+          <p>현재온도</p>
+          <p>{{ temp }}°C</p>
+        </div>
+        <div>
+          <p>최고온도</p>
+          <p>{{ temp_max }}°C</p>
+        </div>
+        <div>
+          <p>최저온도</p>
+          <p>{{ temp_min }}°C</p>
+        </div>
+        <form action="{% url 'infobases:main' %}" method="POST">
+        {% csrf_token %}
+        <label for="city">도시</label>
+        <select name="city" id="city" onchange="this.form.submit()">
+          <option value="Seoul" {% if selected_city == 'Seoul' %}selected{% endif %}>서울</option>
+          <option value="Busan" {% if selected_city == 'Busan' %}selected{% endif %}>부산</option>
+          <option value="Daegu" {% if selected_city == 'Daegu' %}selected{% endif %}>대구</option>
+          <option value="Daejeon" {% if selected_city == 'Daejeon' %}selected{% endif %}>대전</option>
+          <option value="Gwangju" {% if selected_city == 'Gwangju' %}selected{% endif %}>광주</option>
+          <option value="Incheon" {% if selected_city == 'Incheon' %}selected{% endif %}>인천</option>
+          <option value="Jeju" {% if selected_city == 'Jeju' %}selected{% endif %}>제주</option>
+          <option value="london" {% if selected_city == 'london' %}selected{% endif %}>런던</option>
+          <option value="beijing" {% if selected_city == 'beijing' %}selected{% endif %}>베이징</option>
+          <option value="tokyo" {% if selected_city == 'tokyo' %}selected{% endif %}>도쿄</option>
+          <option value="bangkok" {% if selected_city == 'bangkok' %}selected{% endif %}>방콕</option>
+          <option value="sydney" {% if selected_city == 'sydney' %}selected{% endif %}>시드니</option>
+          <option value="toronto" {% if selected_city == 'toronto' %}selected{% endif %}>토론토</option>
+          <option value="new york" {% if selected_city == 'new york' %}selected{% endif %}>뉴욕</option>
+          <option value="Amsterdam" {% if selected_city == 'Amsterdam' %}selected{% endif %}>암스테르담</option>
+          <option value="Berlin" {% if selected_city == 'Berlin' %}selected{% endif %}>베를린</option>
+          <option value="Budapest" {% if selected_city == 'Budapest' %}selected{% endif %}>부다페스트</option>
+          <option value="Cairo" {% if selected_city == 'Cairo' %}selected{% endif %}>카이로</option>
+          <option value="Canberra" {% if selected_city == 'Canberra' %}selected{% endif %}>캔버라</option>
+          <option value="Dubai" {% if selected_city == 'Dubai' %}selected{% endif %}>두바이</option>
+          <option value="Rome" {% if selected_city == 'Rome' %}selected{% endif %}>로마</option>
+          <option value="Singapore" {% if selected_city == 'Singapore' %}selected{% endif %}>싱가포르</option>
+          <option value="Paris" {% if selected_city == 'Paris' %}selected{% endif %}>파리</option>
+          <option value="Manila" {% if selected_city == 'Manila' %}selected{% endif %}>마닐라</option>
+          <option value="Hong Kong" {% if selected_city == 'Hong Kong' %}selected{% endif %}>홍콩</option>
+          <option value="Hanoi" {% if selected_city == 'Hanoi' %}selected{% endif %}>하노이</option>   
+        </select>
+        </form>
+        <div>
+          <p>체감온도</p>
+          <p>{{ feels_like }}°C</p>
+        </div>
+        <div>
+          <p>습도</p>
+          <p>{{ humidity }}%</p>
+        </div>
+        <div>
+          <p>미세먼지</p>
+          <p>{{ PM2_5 }}</p>
+        </div>
+        <div>
+          <p>초미세먼지</p>
+          <p>{{ PM10 }}</p>
+        </div>
+      </div>
+    </section>
+    <section class="container">
+      <div>a</div>
+      <div>b</div>
+      <div>c</div>
+      <div>d</div>
+      <div>e</div>
+      <div>f</div>
+    </section>
   </article>
 
   <script src="/static/js/main.js" type="text/javascript"></script>
-
 {% endblock content %}

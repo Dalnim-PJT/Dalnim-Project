@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+
 {% block style %} 
   <link rel="stylesheet" type="text/css" href="/static/css/main.css"/>
 {% endblock style %}
@@ -11,7 +12,7 @@
         <div class="nav--right">
           <div>
             <form action="" class="nav--right__margin">
-              <input type="search" class="main_color">
+              <input type="search" class="main--color">
               <button type="submit" class="nav--right__btn">
                 <span class="material-symbols-outlined icon__size">search</span>
               </button>
@@ -61,8 +62,9 @@
           <p>최저온도</p>
           <p>{{ temp_min }}°C</p>
         </div>
-        <div class = "weather_label_box"><label for="city">도시</label></div>
-
+        <div class = "weather--label__box">
+          <label for="city">도시</label>
+        </div>
         <div>
           <p>체감온도</p>
           <p>{{ feels_like }}°C</p>
@@ -81,7 +83,7 @@
         </div>
         <form action="{% url 'infobases:main' %}" method="POST">
         {% csrf_token %}
-          <div class = 'weather_select_box'>
+          <div class = "weather--select__box">
             <select name="city" id="city" onchange="this.form.submit()">
               <option value="Seoul" {% if selected_city == 'Seoul' %}selected{% endif %}>서울</option>
               <option value="Busan" {% if selected_city == 'Busan' %}selected{% endif %}>부산</option>
@@ -115,7 +117,9 @@
       </div>
     </section>
     <section class="container">
-      <div>a</div>
+      <div>
+        a
+      </div>
       <div>b</div>
       <div>c</div>
       <div>d</div>

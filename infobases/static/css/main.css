@@ -219,3 +219,22 @@ article {
   border : 1px solid ;
   background-color: cadetblue;
 }
+
+.mySlides {
+  display: none;
+}
+
+.slideshow--container {
+  max-width: 100%;
+  position: relative;
+  margin: auto 0;
+}
+
+/* .text {
+  color: #000000;
+  font-size: 15px;
+  padding: 8px 12px;
+  position: absolute;
+  bottom: 8px;
+  width: 100%;
+} */

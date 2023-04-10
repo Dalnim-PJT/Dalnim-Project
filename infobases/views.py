@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from utils.weather import weather_json, pm_json
+from utils.news import news
 
 # Create your views here.
 
@@ -9,6 +10,7 @@ def main(request):
     pm_api = pm_json(city_name)
     pm2_5 = pm_api['list'][0]['components']['pm2_5']
     pm10 = pm_api['list'][0]['components']['pm10']
+    news_dict = news()
 
     # 미세먼지 수치
     if pm2_5 > 75:
@@ -49,9 +51,11 @@ def main(request):
         'icon': f'https://openweathermap.org/img/wn/{weather_api["weather"][0]["icon"]}@2x.png',    # 날씨 아이콘
         'fine_dust': fine_dust,              # 미세먼지
         'ultrafine_dust': ultrafine_dust,          # 초미세먼지
+        'news_dict': news_dict,
     }
 
     if city_name:
         context['selected_city'] = city_name
     return render(request, 'main.html', context)
 
+    

@@ -1,6 +1,7 @@
 const menuBtn = document.getElementById("menuBtn");
 const menu = document.getElementById("menu");
 
+
 menuBtn.addEventListener("click", () => {
   if (menu.style.maxHeight) {
   menu.style.maxHeight = null;
@@ -8,6 +9,8 @@ menuBtn.addEventListener("click", () => {
   menu.style.maxHeight = menu.scrollHeight + "px";
   }
 });
+
+
 
 
 // carousel

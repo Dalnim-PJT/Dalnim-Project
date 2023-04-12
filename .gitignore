@@ -348,3 +348,6 @@ etc/pjt_dalnim_secret_key.txt
 
 # openweathermap_api_key
 etc/openweathermap_apikey.txt
+
+# youtube_apikey.txt
+etc/youtube_apikey.txt

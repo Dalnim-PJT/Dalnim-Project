@@ -14,6 +14,7 @@ body {
   min-width: 360px;
   /* fixed test*/
   height: 2000px;
+  position: relative;
 }
 
 li {
@@ -133,15 +134,14 @@ nav {
 }
 
 article {
-  display: grid;
+  /* display: grid; */
+  width: 90%;
+  margin: auto;
 }
 
-/* 768px 이상일 때 */
-/* @media screen and (min-width: 768px) {
-  article {
-    padding-top: 100px;   
-  }
-} */
+section {
+  width: 100%;
+}
 
 /* 768px 이하일 때 */
 @media screen and (max-width: 768px) {
@@ -150,15 +150,16 @@ article {
   }
 }
 
-.weather__container {
+.newsandweather__container {
   display: grid;
   grid-template-columns: 1fr;
+  
 }
 
-/* 768px 이상일 때 2분할 */
-@media screen and (min-width: 768px) {
-  .weather__container {
-    grid-template-columns: 50% 50%;  
+/* 1320px 이상일 때 2분할 */
+@media screen and (min-width: 1320px) {
+  .newsandweather__container {
+    grid-template-columns: 50% 50%;
   }
 }
 
@@ -202,7 +203,7 @@ article {
 }
 
 .weather select {
-  margin: 0.5rem;
+  margin: 0.2rem 0;
   font-size: 14px;
 }
 
@@ -229,12 +230,12 @@ article {
 
 .container > div {
   border : 1px solid ;
-  background-color: cadetblue;
+  background-color: rgb(194, 205, 235);
 }
 
 .mySlides {
   display: none;
-  width: 100%;
+  width: 90%;
 }
 
 .slideshow--container {
@@ -245,7 +246,7 @@ article {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding: 5px;
+  
 }
 
 .text {
@@ -256,4 +257,56 @@ article {
   text-overflow: ellipsis;
   color: #000000;
   font-size: 20px;
+}
+
+footer {
+  background-color: #fafafa;
+  height: 90px;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+}
+
+.selectBox {
+  display: inline-block;
+  position: relative;
+  width: 100px;
+  height: 35px;
+  border-radius: 4px;
+  border: 2px solid rgb(194, 205, 235);
+}
+
+.selectBox .select {
+  background: transparent;
+  border: 0 none;
+  outline: 0 none;
+  position: relative;
+  z-index: 3; 
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  appearance: none;
+  border-radius: 4px;
+}
+
+.selectBox .select option {
+  background: rgb(194, 205, 235);
+  color: grey;
+  padding: 3px 0;
+  font-size: 16px;
+  padding-left: 20px; /* 이미지와 텍스트 간격 조절 */
+  background-repeat: no-repeat;
+  background-position: left center;
+}
+
+.select::-webkit-scrollbar {
+  width: 10px;
+}
+.select::-webkit-scrollbar-thumb {
+  background-color: white;
+  border-radius: 10px;
+}
+.select::-webkit-scrollbar-track {
+  background-color: rgb(194, 205, 235);
+  border-radius: 10px;
+  box-shadow: inset 0px 0px 5px white;
 }

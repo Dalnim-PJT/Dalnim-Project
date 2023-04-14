@@ -1,8 +1,9 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block style %} 
   {% comment %} css {% endcomment %}
-  <link rel="stylesheet" type="text/css" href="/static/css/main.css"/>
+  <link rel="stylesheet" type="text/css" href="{% static '/css/main.css' %}">
 {% endblock style %}
 
 {% block content %}
@@ -39,7 +40,7 @@
     </nav>
   </header>
   <article class="width">
-    <section class="weather__container">
+    <section class="newsandweather__container">
       <div class="slideshow--container">
         <span>GeekNews</span>
         {% for key, value in news_dict.items %}
@@ -50,7 +51,6 @@
       </div>
       <div class="weather">
         <div class="weather--img" style="background-image: url('{{ icon }}');">
-          <!-- <img src="{{ icon }}" alt=""> -->
         </div>
         <div>
           <p>{{ weather }}</p>
@@ -68,7 +68,6 @@
           <p>{{ temp_min }}°C</p>
         </div>
         <div class = "weather--label__box">
-          <label for="city">도시</label>
         </div>
         <div>
           <p>체감온도</p>
@@ -88,8 +87,8 @@
         </div>
         <form action="{% url 'infobases:main' %}" method="POST">
         {% csrf_token %}
-          <div class = "weather--select__box">
-            <select name="city" id="city" onchange="this.form.submit()">
+          <div class="selectBox">
+            <select name="city" class="select" id="city" onchange="this.form.submit()" style="height: 30px;">
               {% for city in cities %}
                 <option value="{{ city.value }}" {% if selected_city == city.value %}selected{% endif %}>{{ city.name }}</option>
               {% endfor %}
@@ -100,6 +99,7 @@
     </section>
     <section class="container">
       <div>
+        <p>유튜브 인기 급상승 Top 5</p>
         <iframe width="560" height="315" 
         src={{ youtube_trending_video_list }}
         title="YouTube video player" 
@@ -115,9 +115,12 @@
     </section>
     
   </article>
-  
+
+  <footer>
+    footerfooterfooterfooterfooterfooterfooterfooterfooterfooterfooterfooter
+  </footer>
   {% comment %} javascript {% endcomment %}
-  <script src="/static/js/main.js" type="text/javascript">
+  <script src="{% static '/js/main.js' %}" type="text/javascript">
   
   </script>
 {% endblock content %}

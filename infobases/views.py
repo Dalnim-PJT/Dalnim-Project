@@ -13,7 +13,7 @@ def main(request):
     pm10 = pm_api['list'][0]['components']['pm10']
     news_dict = news()
     youtube_trending_video_list = youtube_trending_video()
-    cities = [ {"name": "서울", "value": "Seoul"}, {"name": "부산", "value": "Busan"}, {"name": "대구", "value": "Daegu"}, {"name": " 대전", "value": "Daejeon"}, {"name": "광주", "value": "Gwangju"}, {"name": "인천", "value": "Incheon"}, {"name": "제주", "value": "Jeju" }, {"name": "런던", "value": "london"}, {"name": "베이징", "value": "beijing"}, {"name": "도쿄", "value": "tokyo"}, {"name": "방콕" , "value": "bangkok"}, {"name": "시드니", "value": "sydney"}, {"name": "토론토", "value": "toronto"}, {"name": "뉴욕", "value": "new york"} , {"name": "암스테르담", "value": "Amsterdam"}, {"name": "베를린", "value": "Berlin"}, {"name": "부다페스트", "value": "Budapest"}, {"name": "카이로", "value": "Cairo"}, {"name": "캔버라", "value": "Canberra"}, {"name": "두바이", "value": "Dubai"}, {"name": "로마", "value": "Rome"}, { "name": "싱가폴", "value": "Singapore"}, {"name": "파리", "value": "Paris"}, {"name": "마닐라", "value": "Manila"}, {"name": "홍콩", "value": "Hong Kong"}, {"name": "하노이", "value": "Hanoi"}]
+    cities = [ {'name': '서울', 'value': 'Seoul'}, {'name': '부산', 'value': 'Busan'}, {'name': '대구', 'value': 'Daegu'}, {'name': ' 대전', 'value': 'Daejeon'}, {'name': '광주', 'value': 'Gwangju'}, {'name': '인천', 'value': 'Incheon'}, {'name': '제주', 'value': 'Jeju' }, {'name': '런던', 'value': 'london'}, {'name': '베이징', 'value': 'beijing'}, {'name': '도쿄', 'value': 'tokyo'}, {'name': '방콕' , 'value': 'bangkok'}, {'name': '시드니', 'value': 'sydney'}, {'name': '토론토', 'value': 'toronto'}, {'name': '뉴욕', 'value': 'new york'} , {'name': '암스테르담', 'value': 'Amsterdam'}, {'name': '베를린', 'value': 'Berlin'}, {'name': '부다페스트', 'value': 'Budapest'}, {'name': '카이로', 'value': 'Cairo'}, {'name': '캔버라', 'value': 'Canberra'}, {'name': '두바이', 'value': 'Dubai'}, {'name': '로마', 'value': 'Rome'}, { 'name': '싱가폴', 'value': 'Singapore'}, {'name': '파리', 'value': 'Paris'}, {'name': '마닐라', 'value': 'Manila'}, {'name': '홍콩', 'value': 'Hong Kong'}, {'name': '하노이', 'value': 'Hanoi'}]
 
     # 미세먼지 수치
     if pm2_5 > 75:
@@ -51,7 +51,7 @@ def main(request):
         'temp_min': round(weather_api['main']['temp_min'], 1),            # 최고 온도
         'temp_max': round(weather_api['main']['temp_max'], 1),            # 최저 온도
         'humidity': weather_api['main']['humidity'],            # 습도
-        'icon': f'https://openweathermap.org/img/wn/{weather_api["weather"][0]["icon"]}@2x.png',    # 날씨 아이콘
+        'icon': f"https://openweathermap.org/img/wn/{weather_api['weather'][0]['icon']}@2x.png",    # 날씨 아이콘
         'fine_dust': fine_dust,              # 미세먼지
         'ultrafine_dust': ultrafine_dust,          # 초미세먼지
         'news_dict': news_dict,

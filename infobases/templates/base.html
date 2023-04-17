@@ -7,12 +7,47 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200">
     <link rel="icon" href="{% static '/img/dalnim_favicon.png' %}">
     <link rel="apple-touch-icon" href="{% static '/img/dalnim_favicon.png' %}">
+    <link rel="stylesheet" type="text/css" href="{% static '/css/base.css' %}">
     <title>Dalnim</title>
     {% block style %} 
     {% endblock style %}
   </head>
   <body>
+    <header>
+      <nav>
+        <div class="width nav--in">
+          <a href="#" class="logo--a"><img src="/static/img/dalnim_logo_02_inner_color.png" alt="logo"></a>
+          <div class="nav--right">
+            <div>
+              <form action="" class="nav--right__margin">
+                <input type="search" class="main--color">
+                <button type="submit" class="nav--right__btn">
+                  <span class="material-symbols-outlined icon__size">search</span>
+                </button>
+              </form>
+            </div>
+            <div>
+              <a href="" class="nav--right__margin nav__font">Join</a>
+              <a href="" class="nav--right__margin nav__font">Login</a>
+              <button type="button" id="menuBtn" class="nav--right__btn">
+                <span class="material-symbols-outlined">menu</span>
+              </button>
+            </div>                    
+            <div>
+              <ul id="menu">
+                <li><a href="">문지수</a></li>
+                <li><a href="">소현섭</a></li>
+                <li><a href="">정미영</a></li>
+                <li><a href="">정소담</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
     {% block content %} 
     {% endblock content %}
+    {% block footer %}
+    {% endblock footer %}
   </body>
 </html>

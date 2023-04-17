@@ -1,6 +1,6 @@
+// menu
 const menuBtn = document.getElementById("menuBtn");
 const menu = document.getElementById("menu");
-
 
 menuBtn.addEventListener("click", () => {
   if (menu.style.maxHeight) {
@@ -9,8 +9,6 @@ menuBtn.addEventListener("click", () => {
   menu.style.maxHeight = menu.scrollHeight + "px";
   }
 });
-
-
 
 
 // carousel
@@ -28,5 +26,4 @@ function showSlides() {
   slides[slideIndex-1].style.display = "block";  
   setTimeout(showSlides, 3000); // Change image every 2 seconds
 }
-
 

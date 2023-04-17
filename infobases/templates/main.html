@@ -7,38 +7,6 @@
 {% endblock style %}
 
 {% block content %}
-  <header>
-    <nav>
-      <div class="width nav--in">
-        <a href="#" class="logo--a"><img src="/static/img/dalnim_logo_02_inner_color.png" alt="logo"></a>
-        <div class="nav--right">
-          <div>
-            <form action="" class="nav--right__margin">
-              <input type="search" class="main--color">
-              <button type="submit" class="nav--right__btn">
-                <span class="material-symbols-outlined icon__size">search</span>
-              </button>
-            </form>
-          </div>
-          <div>
-            <a href="" class="nav--right__margin nav__font">Join</a>
-            <a href="" class="nav--right__margin nav__font">Login</a>
-            <button type="button" id="menuBtn" class="nav--right__btn">
-              <span class="material-symbols-outlined">menu</span>
-            </button>
-          </div>                    
-          <div>
-            <ul id="menu">
-              <li><a href="">문지수</a></li>
-              <li><a href="">소현섭</a></li>
-              <li><a href="">정미영</a></li>
-              <li><a href="">정소담</a></li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </nav>
-  </header>
   <article class="width">
     <section class="newsandweather__container">
       <div class="slideshow--container">
@@ -112,15 +80,27 @@
       <div>d</div>
       <div>e</div>
       <div>f</div>
-    </section>
-    
+    </section> 
   </article>
-
-  <footer>
-    footerfooterfooterfooterfooterfooterfooterfooterfooterfooterfooterfooter
-  </footer>
-  {% comment %} javascript {% endcomment %}
-  <script src="{% static '/js/main.js' %}" type="text/javascript">
-  
-  </script>
+{% comment %} javascript {% endcomment %}
+<script src="{% static '/js/main.js' %}" type="text/javascript"></script>
 {% endblock content %}
+{% block footer %}
+  <footer>
+    <div class="width">
+      <div class="footer--div_1">
+        <a href='https://github.com/sodamjeong' target='_blank' class="name">정소담</a>
+        <span>|</span>
+        <a href='https://github.com/sotthang' target='_blank' class="name">소현섭</a>
+        <span>|</span>
+        <a href='https://github.com/JiSuMun' target='_blank' class="name">문지수</a>
+        <span>|</span>
+        <a href='https://github.com/qloeo' target='_blank' class="name">정미영</a>
+      </div>
+      <div class="footer--div_2">
+        <div>KDT 풀스택 2기 달님반🌙</div>
+        <div>Copyright 2023. All Rights Reserved.</div> 
+      </div>
+    </div>
+  </footer>
+{% endblock footer %}

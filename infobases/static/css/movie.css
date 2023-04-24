@@ -1,0 +1,149 @@
+.poster {
+    width: 80%;
+    margin: auto;
+    opacity: 1;
+    transition: opacity 0.2s ease-in-out;
+    position: relative;
+}
+
+.poster::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 3px;
+    width: 100%;
+    height: 50%;
+    background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.7));
+}
+
+.poster:hover {
+    opacity: 0.8;
+}
+
+.poster:hover::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 50%;
+    background-image: linear-gradient(to top, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.7));
+}
+
+.poster-img {
+    width: 100%;
+}
+
+.rank{
+    position: absolute;
+    left: 20px;
+    bottom: 0;
+    font-size: 45px;
+    font-weight: 700;
+    color: #fff;
+    width: 100%;
+    font-style: oblique;
+    z-index: 1;
+}
+
+.poster:hover .rank {
+    visibility: hidden;
+}
+
+.rating {
+    width: 65px;
+    margin-right: 5px;
+    display: grid;
+    grid-template-columns: auto auto;
+}
+
+.ticketing {
+    margin-left: 5px;
+}
+
+.movie-txt {
+    width: 100%;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.movie-info {
+    display: flex;
+    font-size: 12px;
+    color: gray;
+    width: 50%;
+    margin: auto;
+    justify-content: center;
+    align-items: center;
+}
+
+.movie-title {
+    width: 80%;
+    margin: auto;
+    font-size: 22px;
+    text-align: center;
+    color: rgb(63,73,127);
+    font-weight: 700;
+}
+
+.embla {
+    overflow: hidden;
+    width: 400px;
+    height: 570px;
+    border: 1px solid #000;
+}
+.embla__container {
+    display: flex;
+    height: 100%;
+}
+
+.embla__slide {
+    flex: 0 0 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.movieChart_btn_wrap {
+    font-weight: 400;
+    display: none;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 100px;
+    z-index: 1;
+}
+
+.movie-info-btn {
+    color: #424242;
+    background-color: rgba(255, 249, 251, 0.95);
+    border-radius: 7px;
+    padding: 8px;
+    font-size: 12px;
+    display: inline-block;
+    width: 100%;
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.movie-info-btn:hover {
+    background-color: rgba(255, 249, 251, 0.6);
+}
+
+.movie-ticketing-btn {
+    color: #424242;
+    background-color: rgba(255, 78, 78, 0.95);
+    border-radius: 7px;
+    padding: 8px;
+    font-size: 12px;
+    display: inline-block;
+    width: 100%;
+    text-align: center;
+}
+
+.movie-ticketing-btn:hover {
+    background-color: rgba(255, 78, 78, 0.6);
+}

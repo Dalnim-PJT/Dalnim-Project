@@ -3,6 +3,7 @@
 
 {% block style %} 
   {% comment %} css {% endcomment %}
+  <link rel="stylesheet" type="text/css" href="{% static '/css/main_books.css' %}">
   <link rel="stylesheet" type="text/css" href="{% static '/css/main.css' %}">
   <link rel="stylesheet" type="text/css" href="{% static '/css/movie.css' %}">
   <script src="https://unpkg.com/embla-carousel/embla-carousel.umd.js"></script>
@@ -11,60 +12,102 @@
 
 {% block content %}
   <article class="width">
-    <section class="newsandweather__container">
-      <div class="slideshow--container">
-        <span>GeekNews</span>
-        {% for key, value in news_dict.items %}
-          <div class="mySlides fade">
-            <a class="text" href="{{ key }}" target='_blank'>{{ value }}</a>
+    <form action="{% url 'infobases:main' %}" method="GET">
+      <section class="newsandweather__container">
+        <div class="slideshow--container">
+          <span>GeekNews</span>
+          {% for key, value in news_dict.items %}
+            <div class="mySlides fade">
+              <a class="text" href="{{ key }}" target='_blank'>{{ value }}</a>
+            </div>
+          {% endfor %}
+        </div>
+        <div class="weather">
+          <div class="weather--img" style="background-image: url('{{ icon }}');">
           </div>
-        {% endfor %}
-      </div>
-      <div class="weather">
-        <div class="weather--img" style="background-image: url('{{ icon }}');">
-        </div>
-        <div>
-          <p>{{ weather }}</p>
-        </div>
-        <div>
-          <p>현재온도</p>
-          <p>{{ temp }}°C</p>
-        </div>
-        <div>
-          <p>최고온도</p>
-          <p>{{ temp_max }}°C</p>
-        </div>
-        <div>
-          <p>최저온도</p>
-          <p>{{ temp_min }}°C</p>
-        </div>
-        <div class = "weather--label__box">
-        </div>
-        <div>
-          <p>체감온도</p>
-          <p>{{ feels_like }}°C</p>
-        </div>
-        <div>
-          <p>습도</p>
-          <p>{{ humidity }}%</p>
-        </div>
-        <div>
-          <p>미세먼지</p>
-          <p>{{ fine_dust }}</p>
-        </div>
-        <div>
-          <p>초미세먼지</p>
-          <p>{{ ultrafine_dust }}</p>
-        </div>
-        <form action="{% url 'infobases:main' %}" method="POST">
-        {% csrf_token %}
-          <div class="selectBox">
-            <select name="city" class="select" id="city" onchange="this.form.submit()" style="height: 30px;">
-              {% for city in cities %}
-                <option value="{{ city.value }}" {% if selected_city == city.value %}selected{% endif %}>{{ city.name }}</option>
-              {% endfor %}
-            </select>
+          <div>
+            <p>{{ weather }}</p>
           </div>
+          <div>
+            <p>현재온도</p>
+            <p>{{ temp }}°C</p>
+          </div>
+          <div>
+            <p>최고온도</p>
+            <p>{{ temp_max }}°C</p>
+          </div>
+          <div>
+            <p>최저온도</p>
+            <p>{{ temp_min }}°C</p>
+          </div>
+          <div class = "weather--label__box">
+          </div>
+          <div>
+            <p>체감온도</p>
+            <p>{{ feels_like }}°C</p>
+          </div>
+          <div>
+            <p>습도</p>
+            <p>{{ humidity }}%</p>
+          </div>
+          <div>
+            <p>미세먼지</p>
+            <p>{{ fine_dust }}</p>
+          </div>
+          <div>
+            <p>초미세먼지</p>
+            <p>{{ ultrafine_dust }}</p>
+          </div>
+          <form action="{% url 'infobases:main' %}" method="GET">
+            <div class="selectBox">
+              <select name="city" class="select" id="city" onchange="this.form.submit()" style="height: 30px;">
+                {% for city in cities %}
+                  <option value="{{ city.value }}" {% if selected_city == city.value %}selected{% endif %}>{{ city.name }}</option>
+                {% endfor %}
+              </select>
+            </div>
+        </div>
+      </section>
+      <section class="container">
+        <div>
+          <p>유튜브 인기 급상승 Top 5</p>
+          <iframe width="560" height="315" 
+          src={{ youtube_trending_video_list }}
+          title="YouTube video player" 
+          frameborder="0" 
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+          allowfullscreen></iframe>
+        </div>
+        <div>b</div>
+        <div>c</div>
+        <div>
+          <div>
+            <p>예스24 베스트셀러 Top 5</p>
+            <div class="selectBox">
+              <select name="books" class="select" id="books" onchange="this.form.submit()" style="height: 30px; background-color: white;">
+                <option value="001" {% if selected_book == '001' %}selected{% endif %}>국내도서</option>
+                <option value="002" {% if selected_book == '002' %}selected{% endif %}>외국도서</option>
+                <option value="017" {% if selected_book == '017' %}selected{% endif %}>eBook</option>
+              </select>
+            </div>
+          </div>
+          {% for book in books_list %}
+          <div>
+            <a href="{{ book.book_link }}" class="container--books">
+              <span>&#931{{ book.book_rank|add:1 }};</span>
+                <img src="{{ book.book_img_link }}" alt="{{ book.book_name }}" style="width:70px; height:70px; margin: 0 5px;">
+              <div>
+                <span class="container--books--book_name">{{ book.book_name }}</span><br>
+                <span class="container--books--book_author">{{ book.book_author }}</span>
+              </div>
+            </a>
+          </div>
+          {% endfor %}
+        </div>
+        <div>e</div>
+        <div>f</div>
+      </section> 
+    </form>
         </form>
       </div>
     </section>

@@ -21,6 +21,6 @@ def get_melon_chart():
         album = song.select_one(".ellipsis.rank03 a").get_text(strip=True)
         song_list.append({"rank": rank, "title": title, "artists": ', '.join(artist_list), "album":album})
 
-    top_ten_songs = song_list[:10]
+    top_ten_songs = song_list[:5]
     
     return top_ten_songs

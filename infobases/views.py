@@ -2,6 +2,7 @@ from django.shortcuts import render
 from utils.weather import weather_json, pm_json
 from utils.news import news
 from utils.youtube import youtube_trending_video
+from utils.melon import get_melon_chart
 from utils.books import books
 from utils.movie import movie
 
@@ -18,6 +19,7 @@ def main(request):
     news_dict = news()
     books_list = books(books_category)
     youtube_trending_video_list = youtube_trending_video()
+    top_ten_songs = get_melon_chart()
     movies = movie()
     cities = [ {'name': '서울', 'value': 'Seoul'}, {'name': '부산', 'value': 'Busan'}, {'name': '대구', 'value': 'Daegu'}, {'name': ' 대전', 'value': 'Daejeon'}, {'name': '광주', 'value': 'Gwangju'}, {'name': '인천', 'value': 'Incheon'}, {'name': '제주', 'value': 'Jeju' }, {'name': '런던', 'value': 'london'}, {'name': '베이징', 'value': 'beijing'}, {'name': '도쿄', 'value': 'tokyo'}, {'name': '방콕' , 'value': 'bangkok'}, {'name': '시드니', 'value': 'sydney'}, {'name': '토론토', 'value': 'toronto'}, {'name': '뉴욕', 'value': 'new york'} , {'name': '암스테르담', 'value': 'Amsterdam'}, {'name': '베를린', 'value': 'Berlin'}, {'name': '부다페스트', 'value': 'Budapest'}, {'name': '카이로', 'value': 'Cairo'}, {'name': '캔버라', 'value': 'Canberra'}, {'name': '두바이', 'value': 'Dubai'}, {'name': '로마', 'value': 'Rome'}, { 'name': '싱가폴', 'value': 'Singapore'}, {'name': '파리', 'value': 'Paris'}, {'name': '마닐라', 'value': 'Manila'}, {'name': '홍콩', 'value': 'Hong Kong'}, {'name': '하노이', 'value': 'Hanoi'}]
 
@@ -63,6 +65,7 @@ def main(request):
         'news_dict': news_dict,
         'cities': cities,
         'youtube_trending_video_list': youtube_trending_video_list,
+        'top_ten_songs': top_ten_songs,
         'books_list': books_list,
         'movies' : movies,
 

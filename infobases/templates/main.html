@@ -121,6 +121,12 @@
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
         allowfullscreen></iframe>
       </div>
+      <div>b</div>
+      <div>
+        {% for song in top_ten_songs %}
+          <p>{{ song.rank }} / {{ song.title }} / {{ song.artists }} / {{ song.album }}</p>
+        {% endfor %}  
+      </div>
       {% comment %} movie {% endcomment %}
       <div  class="embla">
         <div class="embla__container">
@@ -157,7 +163,6 @@
           {% endfor %}
         </div>
       </div>
-
       <div>c</div>
       <div>d</div>
       <div>e</div>

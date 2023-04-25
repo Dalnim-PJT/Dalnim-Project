@@ -11,7 +11,7 @@ menuBtn.addEventListener("click", () => {
 });
 
 
-// carousel
+// news carousel
 var slideIndex = 0;
 showSlides();
 
@@ -24,6 +24,22 @@ function showSlides() {
   slideIndex++;
   if (slideIndex > slides.length) {slideIndex = 1}    
   slides[slideIndex-1].style.display = "block";  
-  setTimeout(showSlides, 3000); // Change image every 2 seconds
+  setTimeout(showSlides, 3000);
 }
 
+// melon carousel
+var index = 0;
+var slides = document.querySelectorAll('.slide1, .slide2');
+slideShow();
+
+function slideShow() {
+  for (var i = 0; i < slides.length; i++) {
+    slides[i].style.display = "none";
+  }
+  index++;
+  if (index > slides.length) {
+    index = 1;
+  }
+  slides[index-1].style.display = "block";
+  setTimeout(slideShow, 4000);
+}

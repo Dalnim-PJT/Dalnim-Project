@@ -104,9 +104,33 @@
         </div>
         <div>
           <p>멜론 Top 10</p>
-          {% for song in top_ten_songs %}
-            <p>{{ song.rank }} / {{ song.title }} / {{ song.artists }} / {{ song.album }}</p>
-          {% endfor %}  
+          <div>
+            <div class="slide1">
+              {% for song in top_ten_songs|slice:":5" %}
+                <div class="container--melon">
+                  <a href="{{ music_url }}"><img src="{{ song.image }}" alt="{{ song.album }}" class="melon__image"></a>
+                  <div class="container--melon__info">
+                    <span class="container--melon__title">{{ song.rank }}위 {{ song.title }}</span><br>
+                    <span class="container--melon__artist_album">{{ song.artists }}</span><br>
+                    <span class="container--melon__artist_album">{{ song.album }}</span>
+                  </div>
+                </div>
+              {% endfor %}
+            </div>
+            <div class="slide2">
+              {% for song in top_ten_songs|slice:"5:10" %}
+                <div class="container--melon">
+                  <a href="{{ music_url }}"><img src="{{ song.image }}" alt="{{ song.album }}" class="melon__image"></a>
+                  <div class="container--melon__info">
+                    <span class="container--melon__title">{{ song.rank }}위 {{ song.title }}</span><br>
+                    <span class="container--melon__artist_album">{{ song.artists }}</span><br>
+                    <span class="container--melon__artist_album">{{ song.album }}</span>
+                  </div>
+                </div>
+              {% endfor %}  
+            </div>
+          </div>
+
         </div>
         {% comment %} movie {% endcomment %}
         {% comment %} <div  class="embla">

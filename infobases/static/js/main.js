@@ -43,3 +43,50 @@ function slideShow() {
   slides[index-1].style.display = "block";
   setTimeout(slideShow, 4000);
 }
+
+// movie
+var emblaNode = document.querySelector(".embla");
+  var options = { loop: false };
+  var plugins = [EmblaCarouselAutoplay()]; // Plugins
+
+  var embla = EmblaCarousel(emblaNode, options, plugins);
+
+  var posters = document.querySelectorAll('.poster');
+
+  posters.forEach(function(poster) {
+    poster.addEventListener('mouseover', function() {
+      var btnWrap = poster.querySelector('.movieChart_btn_wrap');
+      btnWrap.style.display = 'block';
+    });
+
+    poster.addEventListener('mouseout', function() {
+      var btnWrap = poster.querySelector('.movieChart_btn_wrap');
+      btnWrap.style.display = 'none';
+    });
+  });
+
+// webtoon
+document.addEventListener('DOMContentLoaded', function () {
+  const carousel = document.querySelector('#webtoon-carousel.webtoon--container');
+  let scrollInterval;
+
+  function scrollWebtoon() {
+    clearInterval(scrollInterval);
+    scrollInterval = setInterval(() => {
+      carousel.scrollLeft += 1;
+      if (carousel.scrollLeft >= carousel.scrollWidth - carousel.clientWidth) {
+        carousel.scrollLeft = 0;
+      }
+    }, 20);
+  }
+
+  scrollWebtoon();
+
+  carousel.addEventListener('mouseover', () => {
+    clearInterval(scrollInterval);
+  });
+
+  carousel.addEventListener('mouseout', () => {
+    scrollWebtoon();
+  });
+});

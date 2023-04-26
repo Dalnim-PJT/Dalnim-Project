@@ -247,6 +247,37 @@ footer {
   font-size: 8px;
 }
 
+
+/* melon css */
+.container--melon {
+  display: flex;
+  margin: 5px;
+}
+
+.container--melon__info {
+  margin-left: 5px;
+}
+
+.container--melon__title {
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.container--melon__artist_album {
+  font-size: 8px;
+}
+
+.melon__image {
+  width:70px; 
+  height:70px;
+}
+
+.slide1,
+.slide2 {
+  display: none;
+}
+
+
 /* movie css */
 .poster {
   width: 80%;
@@ -341,6 +372,7 @@ footer {
   width: 400px;
   height: 570px;
   border: 1px solid #000;
+  margin: auto;
 }
 .embla__container {
   display: flex;
@@ -398,31 +430,48 @@ footer {
   background-color: rgba(255, 78, 78, 0.6);
 }
 
-/* melon css */
-.container--melon {
-  display: flex;
-  margin: 5px;
+/* webtoon section */
+.webtoon--section {
+  white-space: nowrap;
+}
+.webtoon--container {
+  width: 300px;
+  overflow: hidden;
+
+}
+.webtoon--wrap{
+  display: inline-block;
+  position: relative;
+  padding: 0;
+  margin: 0;
+}
+/* .webtoon--position{
+  position: absolute;
+} */
+/* .webtoon__rank{
+  width: 20px;
+  height: 20px;
+  background-color: #fff;
+} */
+.webtoon__title{
+  bottom: 60px;
+  left: 15px;
+  background-color: #fff;
+}
+.webtoon__auth{
+  bottom: 40px;
+  left: 15px;
+  background-color: #fff;
 }
 
-.container--melon__info {
-  margin-left: 5px;
+.webtoon__veiw{
+  bottom: 20px;
+  left: 15px;
+  background-color: #fff;
+}
+/* 
+#webtoon--image {
 }
 
-.container--melon__title {
-  font-size: 12px;
-  font-weight: bold;
-}
-
-.container--melon__artist_album {
-  font-size: 8px;
-}
-
-.melon__image {
-  width:70px; 
-  height:70px;
-}
-
-.slide1,
-.slide2 {
-  display: none;
-}
+#webtoon--image:hover {
+} */

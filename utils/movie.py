@@ -1,10 +1,7 @@
 import requests
 from bs4 import BeautifulSoup
-import ssl
-from time import sleep
 
-# url = 'https://www.cgv.co.kr'
-url = 'https://www.megabox.co.kr'
+url = 'https://www.cgv.co.kr'
 headers = {'User-Agent' : 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.39.132 Safari/53.36'}
 response = requests.get(url, verify=False, headers=headers, timeout=30)
 soup = BeautifulSoup(response.text, 'html.parser')

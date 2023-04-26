@@ -4,7 +4,6 @@
 {% block style %} 
   {% comment %} css {% endcomment %}
   <link rel="stylesheet" type="text/css" href="{% static '/css/main.css' %}">
-  <link rel="stylesheet" type="text/css" href="{% static '/css/movie.css' %}">
   <script src="https://unpkg.com/embla-carousel/embla-carousel.umd.js"></script>
   <script src="https://unpkg.com/embla-carousel-autoplay/embla-carousel-autoplay.umd.js"></script>
 {% endblock style %}
@@ -80,19 +79,18 @@
         <div>
           <div>
             <p>예스24 베스트셀러 Top 5</p>
-            <div class="selectBox">
-              <select name="books" class="select" id="books" onchange="this.form.submit()" style="height: 30px; background-color: white;">
-                <option value="001" {% if selected_book == '001' %}selected{% endif %}>국내도서</option>
-                <option value="002" {% if selected_book == '002' %}selected{% endif %}>외국도서</option>
-                <option value="017" {% if selected_book == '017' %}selected{% endif %}>eBook</option>
-              </select>
-            </div>
+              <div class="selectBox">
+                <select name="books" class="select" id="books" onchange="this.form.submit()" style="height: 30px; background-color: white;">
+                  <option value="001" {% if selected_book == '001' %}selected{% endif %}>국내도서</option>
+                  <option value="002" {% if selected_book == '002' %}selected{% endif %}>외국도서</option>
+                  <option value="017" {% if selected_book == '017' %}selected{% endif %}>eBook</option>
+                </select>
+              </div>
           </div>
           {% for book in books_list %}
           <div>
             <a href="{{ book.book_link }}" class="container--books">
-              <span class="container--books-rank">{{ book.book_rank }}</span>
-              {% comment %} <span class="container--books-rank">&#931{{ book.book_rank|add:1 }};</span> {% endcomment %}
+              {% comment %} <span class="container--books-rank">{{ book.book_rank }}</span> {% endcomment %}
               <img src="{{ book.book_img_link }}" alt="{{ book.book_name }}" class="container--books-img">
               <div>
                 <span class="container--books--book_name">{{ book.book_rank }}위 {{ book.book_name }}</span><br>
@@ -108,7 +106,7 @@
             <div class="slide1">
               {% for song in top_ten_songs|slice:":5" %}
                 <div class="container--melon">
-                  <a href="{{ music_url }}"><img src="{{ song.image }}" alt="{{ song.album }}" class="melon__image"></a>
+                  <a href="{{ song.music_url }}"><img src="{{ song.image }}" alt="{{ song.album }}" class="melon__image"></a>
                   <div class="container--melon__info">
                     <span class="container--melon__title">{{ song.rank }}위 {{ song.title }}</span><br>
                     <span class="container--melon__artist_album">{{ song.artists }}</span><br>
@@ -120,7 +118,7 @@
             <div class="slide2">
               {% for song in top_ten_songs|slice:"5:10" %}
                 <div class="container--melon">
-                  <a href="{{ music_url }}"><img src="{{ song.image }}" alt="{{ song.album }}" class="melon__image"></a>
+                  <a href="{{ song.music_url }}"><img src="{{ song.image }}" alt="{{ song.album }}" class="melon__image"></a>
                   <div class="container--melon__info">
                     <span class="container--melon__title">{{ song.rank }}위 {{ song.title }}</span><br>
                     <span class="container--melon__artist_album">{{ song.artists }}</span><br>
@@ -130,47 +128,60 @@
               {% endfor %}  
             </div>
           </div>
-
         </div>
-        {% comment %} movie {% endcomment %}
-        {% comment %} <div  class="embla">
-          <div class="embla__container">
-            {% for rank,movie in movies.items %}
-              <div class="embla__slide">
-                <div class="poster">
-                  <div class="rank">
-                    <span>{{ rank }}</span>
-                  </div>
-                  <img src="{{ movie.0 }}" alt="" class="poster-img">
-                  <div class="movieChart_btn_wrap">
-                    <a href="{{ movie.5 }}" class="movie-info-btn" >상세보기</a>
-                    <a href="{{ movie.6 }}" class="movie-ticketing-btn">예매하기</a>
-                  </div>
-                </div>
-                <div class="movie-txt">
-                  <div>
-                    <a href="{{ movie.5 }}" class="movie-title">
-                      <span class="movie-title">{{ movie.1 }}</span>
-                    </a>
-                  </div>
-                  <div class="movie-info">
-                    <div class="rating">
-                      <img src="{{ movie.2 }}" alt="">
-                      <p>{{ movie.3 }}</p>
+        <div>
+          <p>CGV Top 10</p>
+          <div class="embla">
+            <div class="embla__container">
+              {% for rank,movie in movies.items %}
+                <div class="embla__slide">
+                  <div class="poster">
+                    <div class="rank">
+                      <span>{{ rank }}</span>
                     </div>
-                    <div>|</div>
-                    <div class="ticketing">
-                      <p>{{ movie.4 }}</p>
+                    <img src="{{ movie.0 }}" alt="" class="poster-img">
+                    <div class="movieChart_btn_wrap">
+                      <a href="{{ movie.5 }}" class="movie-info-btn" >상세보기</a>
+                      <a href="{{ movie.6 }}" class="movie-ticketing-btn">예매하기</a>
                     </div>
                   </div>
+                  <div class="movie-txt">
+                    <div>
+                      <a href="{{ movie.5 }}" class="movie-title">
+                        <span class="movie-title">{{ movie.1 }}</span>
+                      </a>
+                    </div>
+                    <div class="movie-info">
+                      <div class="rating">
+                        <img src="{{ movie.2 }}" alt="">
+                        <p>{{ movie.3 }}</p>
+                      </div>
+                      <div>|</div>
+                      <div class="ticketing">
+                        <p>{{ movie.4 }}</p>
+                      </div>
+                    </div>
+                  </div>
                 </div>
-              </div>
+              {% endfor %}
+            </div>
+          </div>
+        </div>
+        <div class="webtoon--section">
+          <p>탑툰 Top 5</p>
+          <div id="webtoon-carousel" class="webtoon--container">
+            {% for rank, webtoon in webtoons.items %}
+            <ul class="webtoon--wrap">
+              <li class="webtoon--position webtoon__rank rank">{{ rank }}</li>
+              <li><img id="webtoon--image" src="{{ webtoon.0 }}" alt="img"></li>
+              <li class="webtoon--position webtoon__title">{{ webtoon.1 }}</li>
+              <li class="webtoon--position webtoon__auth">{{ webtoon.2 }}</li>
+              <li class="webtoon--position webtoon__veiw">{{ webtoon.3 }}</li>
+            </ul>
             {% endfor %}
           </div>
-        </div> {% endcomment %}
-        <div>d</div>
+        </div>
         <div>e</div>
-        <div>f</div>
       </section> 
     </form>
         </form>
@@ -179,29 +190,6 @@
   </article>
 {% comment %} javascript {% endcomment %}
 <script src="{% static '/js/main.js' %}" type="text/javascript"></script>
-
-{% comment %} movie {% endcomment %}
-<script type="text/javascript">
-  var emblaNode = document.querySelector(".embla");
-  var options = { loop: false };
-  var plugins = [EmblaCarouselAutoplay()]; // Plugins
-
-  var embla = EmblaCarousel(emblaNode, options, plugins);
-
-  var posters = document.querySelectorAll('.poster');
-
-  posters.forEach(function(poster) {
-    poster.addEventListener('mouseover', function() {
-      var btnWrap = poster.querySelector('.movieChart_btn_wrap');
-      btnWrap.style.display = 'block';
-    });
-
-    poster.addEventListener('mouseout', function() {
-      var btnWrap = poster.querySelector('.movieChart_btn_wrap');
-      btnWrap.style.display = 'none';
-    });
-  });
-</script>
 
 
 {% endblock content %}

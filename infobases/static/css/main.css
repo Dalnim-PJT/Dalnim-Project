@@ -215,6 +215,7 @@ footer {
   color: rgb(194, 205, 235);
 }
 
+/* book css */
 .container--books {
   /* display: inline-flex; */
   display: grid;
@@ -246,6 +247,7 @@ footer {
   font-size: 8px;
 }
 
+/* movie css */
 .poster {
   width: 80%;
   margin: auto;
@@ -396,3 +398,31 @@ footer {
   background-color: rgba(255, 78, 78, 0.6);
 }
 
+/* melon css */
+.container--melon {
+  display: flex;
+  margin: 5px;
+}
+
+.container--melon__info {
+  margin-left: 5px;
+}
+
+.container--melon__title {
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.container--melon__artist_album {
+  font-size: 8px;
+}
+
+.melon__image {
+  width:70px; 
+  height:70px;
+}
+
+.slide1,
+.slide2 {
+  display: none;
+}

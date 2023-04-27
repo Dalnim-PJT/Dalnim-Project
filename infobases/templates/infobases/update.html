@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>update</h1>
+<form action="{% url 'infobases:update' info.pk %}" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{form.as_p}}
+    <input type="submit" value="수정">
+</form>
+{% endblock content %}

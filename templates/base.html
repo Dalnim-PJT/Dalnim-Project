@@ -16,7 +16,7 @@
     <header>
       <nav>
         <div class="width nav--in">
-          <a href="#" class="logo--a"><img src="/static/img/dalnim_logo_02_inner_color.png" alt="logo"></a>
+          <a href="{% url 'infobases:main' %}" class="logo--a"><img src="/static/img/dalnim_logo_02_inner_color.png" alt="logo"></a>
           <div class="nav--right">
             <div>
               <form action="" class="nav--right__margin">
@@ -27,18 +27,23 @@
               </form>
             </div>
             <div>
-              <a href="" class="nav--right__margin nav__font">Join</a>
-              <a href="" class="nav--right__margin nav__font">Login</a>
+              {% if request.user.is_authenticated %}
+                <a href="{% url 'accounts:profile' user %}" class="nav--right__margin nav__font">{{ user }}</a>
+                <a href="{% url 'accounts:logout' %}" class="nav--right__margin nav__font">Logout</a>
+              {% else %}
+                <a href="{% url 'accounts:join' %}" class="nav--right__margin nav__font">Join</a>
+                <a href="{% url 'accounts:login' %}" class="nav--right__margin nav__font">Login</a>
+              {% endif %}
               <button type="button" id="menuBtn" class="nav--right__btn">
                 <span class="material-symbols-outlined">menu</span>
               </button>
-            </div>                    
+            </div>
             <div>
               <ul id="menu">
                 <li><a href="">문지수</a></li>
                 <li><a href="">소현섭</a></li>
                 <li><a href="">정미영</a></li>
-                <li><a href="">정소담</a></li>
+                <li><a href="{% url 'infobases:create' %}">정소담</a></li>
               </ul>
             </div>
           </div>

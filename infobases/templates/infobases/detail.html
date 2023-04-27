@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block style %} 
+{% endblock style %}
+
+{% block content %}
+  <h1>Detail</h1>
+  <p>{{ info.pk }}</p>
+  <p>{{ info.title }}</p>
+  <p>{{ info.content }}</p>
+  {% for info, images in info_images  %}
+    {% if images %}
+      {% for image in images  %}
+        <img src="{{ image.image.url }}" alt="">
+      {% endfor %}
+    {% endif %}
+  {% endfor %}
+<a href="{% url 'infobases:update' info.pk %}">UPDATE</a>
+<form action="{% url 'infobases:delete' info.pk %}" method="POST">
+  {% csrf_token %}
+  <input type="submit" value="DELETE">
+</form>
+<hr>
+<a href="{% url 'infobases:main'%}">MAIN</a>
+{% endblock content %}

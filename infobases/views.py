@@ -1,4 +1,5 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+from django.contrib.auth.decorators import login_required
 from utils.weather import weather_json, pm_json
 from utils.news import news
 from utils.youtube import youtube_trending_video
@@ -6,11 +7,14 @@ from utils.melon import get_melon_chart
 from utils.books import books
 from utils.movie import movie
 from utils.webtoon import webtoon
+from .models import Info, Image, Comment
+from .forms import InfoForm, CommentForm, ImageForm
 
 
 # Create your views here.
 
 def main(request):
+    infos = Info.objects.all()
     city_name = request.GET.get('city', 'Seoul')
     books_category = request.GET.get('books', '001')
     weather_api = weather_json(city_name)
@@ -71,12 +75,116 @@ def main(request):
         'books_list': books_list,
         'movies' : movies,
         'webtoons' : webtoons,
+        'infos': infos,
     }
 
     if city_name:
         context['selected_city'] = city_name
     if books_category:
         context['selected_book'] = books_category
-    return render(request, 'main.html', context)
+    return render(request, 'infobases/main.html', context)
 
+
+@login_required
+def create(request):
+    info_form = InfoForm()
+    image_form = ImageForm()
+    if request.method == 'POST':
+        info_form = InfoForm(request.POST)
+        files = request.FILES.getlist('image')
+        if info_form.is_valid():
+            form = info_form.save(commit=False)
+            form.user = request.user
+            form.save()
+            for i in files:
+                Image.objects.create(image=i, info=form)
+            return redirect('infobases:detail', form.pk)
+    context = {
+        'info_form': info_form,
+        'image_form': image_form,
+    }
+    return render(request, 'infobases/create.html', context)
+
+
+def detail(request, infobase_pk):
+    info = Info.objects.get(pk=infobase_pk)
+    comments = info.comment_set.all()
+    comment_form = CommentForm()
+    form = CommentForm(request.POST, instance=info)
     
+    info_images = []
+    images = Image.objects.filter(info=info)
+    if images:
+        info_images.append((info, images))
+    else:
+        info_images.append((info, ''))
+    
+    context = {
+        'info': info,
+        'info_images': info_images,
+        'comments': comments,
+        'comment_form': comment_form,
+        'form': form,
+    }
+    return render(request, 'infobases/detail.html', context)
+
+
+@login_required
+def delete(request, infobase_pk):
+    info = Info.objects.get(pk=infobase_pk)
+    if info.user == request.user:
+        info.delete()
+    return redirect('infobases:main')
+
+
+@login_required
+def update(request, infobase_pk):
+    info = Info.objects.get(pk=infobase_pk)
+    if request.user == info.user:
+        if request.methd == 'POST':
+            info_form = InfoForm(request.POST, instance=info)
+            files = request.FILES.getlist('image')
+            if form.is_valid():
+                form = info_form.save(commit=False)
+                form.user = request.user
+                form.save()
+                for i in files:
+                    Image.objects.create(image=i, product=form)
+                return redirect('infobases:detail', form.pk)
+        else:
+            info_form = InfoForm(instance=info)
+            image_form = ImageForm()
+    else:
+        return redirect('infobases:main')
+    context = {
+        'info': info,
+        'info_form': info_form,
+        'image_form': image_form,
+    }
+    return render(request, 'infobases/updaste.html', context)
+
+
+@login_required
+def comments_create(request, infobase_pk):
+    info = Info.objects.get(pk=infobase_pk)
+    comment_form = CommentForm(request.POST)
+    
+    if comment_form.is_valid():
+        comment = comment_form.save(commit=False)
+        comment.info = info
+        comment = comment_form.save()
+        return redirect('infobases:detail', info.pk)
+    context = {
+        'info': info,
+        'comment_form': comment_form,
+    }
+    return render(request, 'infobases/detail.html', context)
+
+
+@login_required
+def comments_delete(request, infobase_pk, comment_pk):
+    comment = Comment.objects.get(pk=comment_pk)
+    if request.user == comment.user:
+        comment.delete()
+    return redirect('infobases:detail', infobase_pk)
+

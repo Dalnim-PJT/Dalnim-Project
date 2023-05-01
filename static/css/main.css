@@ -1,16 +1,11 @@
+
 .main--color {
   border-color: rgb(63,73,127);
 }
 
-.width {
-  width: 75%;
-  margin: auto;
-}
-
 article {
   /* display: grid; */
-  width: 90%;
-  margin: auto;
+  width: 100%;
   padding-bottom: 100px;
 }
 
@@ -224,9 +219,15 @@ footer {
   position: relative;
 }
 
+.container--books-category {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
 .container--books-img {
   width:70px; 
-  height:70px;
+  height:70px
 }
 
 .container--books-rank {

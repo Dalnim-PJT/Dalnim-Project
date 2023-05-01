@@ -1,11 +1,46 @@
 {% extends 'base.html' %}
 {% load static %}
 
+{% block style %}
+<style>
+.mar {
+  width: 450px;
+  margin: 0 auto;
+}
+
+.input_btn {
+  width: 400px;
+  border: none;
+  background-color: rgb(63,73,127);
+  color: white;
+  border-radius: 10px;
+  padding: 7px;
+}
+
+.form-control{
+  display: block;
+  padding: 0.375rem 0.75rem;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+  color: black;
+  background-color: white;
+  background-clip: padding-box;
+  border: 1px solid #dee2e6;
+  appearance: none;
+  border-radius: 0.375rem;
+  transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+}
+
+</style>
+{% endblock style %}
+
 {% block content %}
-  <h1>로그인</h1>
+<div class="mar">
   <form action="{% url 'accounts:login' %}" method="POST">
     {% csrf_token %}
     {{ form.as_p }}
-    <input type="submit" value="로그인">
+    <input type="submit" value="로그인" class="input_btn">
   </form>
+</div>
 {% endblock content %}

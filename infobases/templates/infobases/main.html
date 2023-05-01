@@ -3,13 +3,13 @@
 
 {% block style %} 
   {% comment %} css {% endcomment %}
-  <link rel="stylesheet" type="text/css" href="{% static '/css/main.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
   <script src="https://unpkg.com/embla-carousel/embla-carousel.umd.js"></script>
   <script src="https://unpkg.com/embla-carousel-autoplay/embla-carousel-autoplay.umd.js"></script>
 {% endblock style %}
 
 {% block content %}
-  <article class="width">
+  <article>
     <form action="{% url 'infobases:main' %}" method="GET">
       <section class="newsandweather__container">
         <div class="slideshow--container">
@@ -77,7 +77,7 @@
           allowfullscreen></iframe>
         </div>
         <div>
-          <div>
+          <div class="container--books-category">
             <p>예스24 베스트셀러 Top 5</p>
               <div class="selectBox">
                 <select name="books" class="select" id="books" onchange="this.form.submit()" style="height: 30px; background-color: white;">
@@ -167,7 +167,47 @@
             </div>
           </div>
         </div>
-        <div class="webtoon--section">
+        <!-- webtoon -->
+        <div>
+          <p>탑툰 Top 5</p>
+          <div class="embla">
+            <div class="embla__container">
+              {% for rank,webtoon in webtoon.items %}
+                <div class="embla__slide">
+                  <div class="poster">
+                    <div class="rank">
+                      <span>{{ rank }}</span>
+                    </div>
+                    <img src="{{ webtoon.0 }}" alt="" class="poster-img">
+                    <div class="movieChart_btn_wrap">
+                      <a href="#" class="movie-info-btn" >상세보기</a>
+                    </div>
+                  </div>
+                  <div class="movie-txt">
+                    <div>
+                      
+                      <span class="movie-title">{{ webtoon.1 }}</span>
+                      
+                    </div>
+                    <div class="movie-info">
+                      <div class="rating">
+                    
+                        <p>{{ webtoon.2 }}</p>
+                      </div>
+                      <div>|</div>
+                      <div class="ticketing">
+                        <p>{{ webtoon.3 }}</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              {% endfor %}
+            </div>
+          </div>
+        </div>
+        <!--
+          
+         <div class="webtoon--section">
           <p>탑툰 Top 5</p>
           <div id="webtoon-carousel" class="webtoon--container">
             {% for rank, webtoon in webtoons.items %}
@@ -180,7 +220,7 @@
             </ul>
             {% endfor %}
           </div>
-        </div>
+        </div> -->
         <div>e</div>
       </section> 
     </form>

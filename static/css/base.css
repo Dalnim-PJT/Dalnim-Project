@@ -35,6 +35,11 @@ header {
   margin: auto;
 }
 
+.main--color {
+  border-color: rgb(63,73,127);
+  height: 30px;
+}
+
 nav {
   width: 100%;
   background-color: rgb(194, 205, 235);
@@ -116,6 +121,10 @@ nav {
   line-height: 70px;
 }
 
+#menu li a {
+  color: rgb(63,73,127);
+}
+
 #menuBtn {
   position: relative;
 }
@@ -130,3 +139,61 @@ nav {
   vertical-align: sub;
 }
 
+.form-control{
+  display: block;
+  padding: 0.375rem 0.75rem;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+  color: black;
+  background-color: white;
+  background-clip: padding-box;
+  border: 1px solid #dee2e6;
+  appearance: none;
+  border-radius: 0.375rem;
+  transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+}
+
+.form-control:focus {
+  border-color: rgb(138, 147, 202);
+  outline: none;
+  box-shadow: 0.5px 0.5px 10px 1px rgba(173, 182, 233, 0.3);
+}
+
+.mar {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.input_btn {
+  width: 400px;
+  border: none;
+  background-color: rgb(63,73,127);
+  color: white;
+  border-radius: 0.375rem;
+  padding: 10px 0;
+  margin-bottom: 5px;
+  font-size: 15px;
+  display: block;
+  cursor: pointer;
+}
+
+input[type=file]::file-selector-button {
+  /* width: 100px;
+  height: 30px;
+  background: #fff;
+  border: 1px solid #dee2e6;
+  border-radius: 0.375rem;
+  cursor: pointer; */
+  display: none;
+}
+
+form p input{
+  margin-top: 5px;
+}
+
+.search--box {
+  display: flex;
+  justify-content: center;
+}

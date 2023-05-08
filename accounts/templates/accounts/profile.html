@@ -1,15 +1,73 @@
 {% extends 'base.html' %}
 {% load static %}
 
-{% block style %} 
-
+{% block style %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/profile.css' %}">
 {% endblock style %}
 
 {% block content %}
-  <div>
-    <h1>
-      {{ person.username }}님의 프로필 페이지
-      <a href="{% url 'accounts:update' %}">수정</a>
-    </h1>
-  </div>
+  <div class="profile--container">
+    <div class="profile--wrap">
+      <h1>
+        {{ person.username }}님의 프로필 페이지
+      </h1>
+      <div >
+        <img src="{% if person.profile_img %}{{ person.profile_img.url }}{% else %}{% static 'img/default_profile_img.jpeg' %}{% endif %}" alt="" class="profile--img">
+      </div>
+        
+      <p class="profile--txt">이메일: {{ person.email }}</p>
+      <p class="profile--txt">이름: {{ person.last_name }}{{ person.first_name }}</p>
+      <p class="profile--txt">생년월일: {{ person.birthday }}</p>
+      {% if request.user == person %}
+        <a href="{% url 'accounts:update' %}" class="input_btn">수정</a>
+        <form action="{% url 'accounts:delete' %}" method="POST">
+          {% csrf_token %}
+          <input type="submit" value="탈퇴" class="input_btn">
+        </form>
+      {% endif %}
+      <h3>{{ person.username }} 님이 작성한 모든 게시글</h3>
+      <table class="profile--article--list">
+        <thead>
+          <tr>
+            <th scope="col">No</th>
+            <th scope="col">제목</th>
+            <th scope="col">작성일</th>
+            <th scope="col">조회수</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for info in person.info_set.all %}
+            {% if person.id == info.user_id %}
+            <tr>
+              <th scope="row">{{ info.pk }}</th>
+              <td><a href="{% url 'infobases:detail' info.pk %}">{{ info.title }}</a></td>
+              <td>{{ info.created_at|date:"Y-m-d H:m" }}</td>
+              <td>{{ info.views }}</td>
+            </tr>
+            {% endif %}
+          {% endfor %}
+        </tbody>
+      </table>
+
+      <h3>{{ person.username }} 님이 작성한 모든 댓글</h3>
+      <table class="profile--article--list">
+        <thead>
+          <tr>
+            <th scope="col">No</th>
+            <th scope="col">댓글</th>
+            <th scope="col">작성일</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for comment in person.comment_set.all %}
+            {% if person.id == comment.user_id  %}
+            <tr>
+              <th scope="row">{{ comment.pk }}</th>
+              <td><a href="{% url 'infobases:detail' comment.info.pk %}">{{ comment.content }}</a></td>
+              <td>{{ comment.created_at|date:"Y-m-d H:m"  }}</td>
+            </tr>
+            {% endif %}
+          {% endfor %}
+        </tbody>
+      </table>
 {% endblock content %}

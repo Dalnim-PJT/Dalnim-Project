@@ -23,4 +23,13 @@
 </form>
 <hr>
 <a href="{% url 'infobases:main'%}">MAIN</a>
+<form action="{% url 'infobases:comments_create' info.pk %}" method="POST">
+  {% csrf_token %}
+  {{ comment_form }}
+  <input type="submit" value="업로드">
+</form>
+{% for comment in comments  %}
+  {{ comment.content }}
+{% endfor %}
+
 {% endblock content %}

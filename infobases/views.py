@@ -9,6 +9,8 @@ from utils.movie import movie
 from utils.webtoon import webtoon
 from .models import Info, Image, Comment
 from .forms import InfoForm, CommentForm, ImageForm
+from django.db.models.signals import pre_save
+from django.dispatch import receiver
 
 
 # Create your views here.
@@ -111,6 +113,8 @@ def detail(request, infobase_pk):
     comments = info.comment_set.all()
     comment_form = CommentForm()
     form = CommentForm(request.POST, instance=info)
+    info.views += 1
+    info.save()
     
     info_images = []
     images = Image.objects.filter(info=info)
@@ -141,7 +145,7 @@ def delete(request, infobase_pk):
 def update(request, infobase_pk):
     info = Info.objects.get(pk=infobase_pk)
     if request.user == info.user:
-        if request.methd == 'POST':
+        if request.method == 'POST':
             info_form = InfoForm(request.POST, instance=info)
             files = request.FILES.getlist('image')
             if form.is_valid():
@@ -161,7 +165,7 @@ def update(request, infobase_pk):
         'info_form': info_form,
         'image_form': image_form,
     }
-    return render(request, 'infobases/updaste.html', context)
+    return render(request, 'infobases/update.html', context)
 
 
 @login_required
@@ -172,6 +176,7 @@ def comments_create(request, infobase_pk):
     if comment_form.is_valid():
         comment = comment_form.save(commit=False)
         comment.info = info
+        comment.user = request.user
         comment = comment_form.save()
         return redirect('infobases:detail', info.pk)
     context = {
@@ -187,4 +192,13 @@ def comments_delete(request, infobase_pk, comment_pk):
     if request.user == comment.user:
         comment.delete()
     return redirect('infobases:detail', infobase_pk)
+
+
+@receiver(pre_save, sender=Info)
+def increment_view_count(sender, instance, **kwargs):
+    if instance.pk is None:
+        return
+    old_instance = Info.objects.get(pk=instance.pk)
+    if old_instance.views != instance.views:
+        instance.views = old_instance.views + 1
 

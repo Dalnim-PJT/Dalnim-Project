@@ -1,0 +1,53 @@
+.profile--container{
+    width: 90%;
+    margin: auto;
+    margin-bottom: 20px;
+}
+    
+.profile--wrap {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.profile--img {
+  width: 100px;
+  height: 100px;
+}
+
+.profile--txt {
+  margin-bottom: 5px;
+}
+
+.profile--article--list {
+    width: 70%;
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+
+.profile--article--list thead th {
+    padding: 0.6rem;
+}
+
+.profile--article--list tbody th,
+.profile--article--list tbody td {
+    border-top: 1px solid black;
+    padding: 0.5rem;
+}
+
+.profile--article--list tbody td {
+    border-left: 1px solid black;
+}
+
+td {
+  text-align: center;
+}
+
+thead {
+  background-color: rgb(63,73,127);
+  color: white;
+}
+
+th {
+  border-left:  1px solid black;
+}

@@ -177,6 +177,7 @@ nav {
   font-size: 15px;
   display: block;
   cursor: pointer;
+  text-align: center;
 }
 
 input[type=file]::file-selector-button {

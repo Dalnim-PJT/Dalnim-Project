@@ -11,7 +11,7 @@ from .models import Info, Image, Comment
 from .forms import InfoForm, CommentForm, ImageForm
 from django.db.models.signals import pre_save
 from django.dispatch import receiver
-
+from multiprocessing import Process
 
 # Create your views here.
 
@@ -30,7 +30,7 @@ def main(request):
     movies = movie()
     webtoons = webtoon()
     cities = [ {'name': '서울', 'value': 'Seoul'}, {'name': '부산', 'value': 'Busan'}, {'name': '대구', 'value': 'Daegu'}, {'name': ' 대전', 'value': 'Daejeon'}, {'name': '광주', 'value': 'Gwangju'}, {'name': '인천', 'value': 'Incheon'}, {'name': '제주', 'value': 'Jeju' }, {'name': '런던', 'value': 'london'}, {'name': '베이징', 'value': 'beijing'}, {'name': '도쿄', 'value': 'tokyo'}, {'name': '방콕' , 'value': 'bangkok'}, {'name': '시드니', 'value': 'sydney'}, {'name': '토론토', 'value': 'toronto'}, {'name': '뉴욕', 'value': 'new york'} , {'name': '암스테르담', 'value': 'Amsterdam'}, {'name': '베를린', 'value': 'Berlin'}, {'name': '부다페스트', 'value': 'Budapest'}, {'name': '카이로', 'value': 'Cairo'}, {'name': '캔버라', 'value': 'Canberra'}, {'name': '두바이', 'value': 'Dubai'}, {'name': '로마', 'value': 'Rome'}, { 'name': '싱가폴', 'value': 'Singapore'}, {'name': '파리', 'value': 'Paris'}, {'name': '마닐라', 'value': 'Manila'}, {'name': '홍콩', 'value': 'Hong Kong'}, {'name': '하노이', 'value': 'Hanoi'}]
-
+    
     # 미세먼지 수치
     if pm2_5 > 75:
         fine_dust = '매우나쁨'

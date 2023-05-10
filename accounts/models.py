@@ -7,7 +7,7 @@ import os
 
 class User(AbstractUser):
     birthday = models.DateField(null=True)
-    profile_img = models.ImageField(upload_to='', blank=True)
+    profile_img = models.ImageField(upload_to='', blank=True, null=True)
 
     def delete(self, *args, **kargs):
         if self.profile_img:

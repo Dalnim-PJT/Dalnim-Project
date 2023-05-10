@@ -18,4 +18,13 @@ class CommentForm(forms.ModelForm):
     class Meta:
         model = Comment
         fields = ('content',)
-    
+    content = forms.CharField(
+        label = '',
+        label_suffix='',
+        required=True,
+        widget=forms.TextInput(
+            attrs={
+                'class': 'form-control', 
+                'style': 'width: 374.4px'
+            })
+    )

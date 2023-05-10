@@ -2,34 +2,69 @@
 {% load static %}
 
 {% block style %} 
+<link rel="stylesheet" href="{% static 'css/detail.css' %}">
 {% endblock style %}
 
 {% block content %}
-  <h1>Detail</h1>
-  <p>{{ info.pk }}</p>
-  <p>{{ info.title }}</p>
-  <p>{{ info.content }}</p>
-  {% for info, images in info_images  %}
-    {% if images %}
-      {% for image in images  %}
-        <img src="{{ image.image.url }}" alt="">
-      {% endfor %}
-    {% endif %}
-  {% endfor %}
-<a href="{% url 'infobases:update' info.pk %}">UPDATE</a>
-<form action="{% url 'infobases:delete' info.pk %}" method="POST">
-  {% csrf_token %}
-  <input type="submit" value="DELETE">
-</form>
-<hr>
-<a href="{% url 'infobases:main'%}">MAIN</a>
-<form action="{% url 'infobases:comments_create' info.pk %}" method="POST">
-  {% csrf_token %}
-  {{ comment_form }}
-  <input type="submit" value="업로드">
-</form>
-{% for comment in comments  %}
-  {{ comment.content }}
-{% endfor %}
+<article>
+  <section class="detail--wrap">
+    <p class="detail--title">제목 : {{ info.title }}</p>
+    <div class="detail--box">
+      <div>{{ info.content }}</div>
+      <div class="detail--user"> 
+        <div class="detail--btn--box">
+          <a href="{% url 'infobases:update' info.pk %}" class="detail--btn">UPDATE</a>
+          {% if info.user == request.user %}
+            <form action="{% url 'infobases:delete' info.pk %}">
+              {% csrf_token %}
+              <input type="submit" value="DELETE"  class="detail--btn">
+            </form>
+          {% endif %}
+          <a href="{% url 'infobases:main'%}"  class="detail--btn">MAIN</a>
+        </div>
+        <p>작성자 : {{ info.user }}</p>
+        <p>작성일 : {{ info.created_at|date:'Y-m-d' }}</p>
+      </div>
+    </div>
 
+    <div>
+      {% for info, images in info_images  %}
+        {% if images %}
+          {% for image in images %}
+            <img class="detail--image" src="{{ image.image.url }}" alt="">
+          {% endfor %}  
+        {% endif %}
+      {% endfor %}
+    </div>
+    
+  </section>
+  
+  <section class="detail--comment--container">
+    <form action="{% url 'infobases:comments_create' info.pk %}" method="POST">
+      {% csrf_token %}
+      {{ comment_form }}
+      <input type="submit" value="댓글작성">
+    </form>
+    <h4>Comment({{comments|length}})</h4>
+    <div class="detail--comment">
+      {% if comments %}
+        {% for comment in comments %}
+          <div>
+            <div>
+              {% comment %} <img src="{% if comment.user.profile_img %}{{ comment.user.profile_img.url }}{% else %}{% static 'img/default_profile_img.jpeg' %}{% endif %}" 
+              alt="{{ comment.user.profile_img.url }}"> {% endcomment %}
+              <p>{{ comment.user }}</p>
+              <p>{{ comment.content }}</p>
+              {% if request.user == comment.user %}
+                <a href="{% url 'infobases:comments_delete' info.pk comment.pk %}"  class="detail--btn">삭제</a>
+              {% endif %}
+            </div> 
+          </div>
+        {% endfor %}
+      {% else %}
+        <div>댓글이 없습니다.</div>
+      {% endif %}
+    </div>
+  </section>
+</article>
 {% endblock content %}

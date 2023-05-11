@@ -56,14 +56,13 @@
             <p>초미세먼지</p>
             <p>{{ ultrafine_dust }}</p>
           </div>
-          <form action="{% url 'infobases:main' %}" method="GET">
-            <div class="selectBox">
-              <select name="city" class="select" id="city" onchange="this.form.submit()" style="height: 30px;">
-                {% for city in cities %}
-                  <option value="{{ city.value }}" {% if selected_city == city.value %}selected{% endif %}>{{ city.name }}</option>
-                {% endfor %}
-              </select>
-            </div>
+          <div class="selectBox">
+            <select name="city" class="select" id="city" onchange="this.form.submit()" style="height: 30px;">
+              {% for city in cities %}
+                <option value="{{ city.value }}" {% if selected_city == city.value %}selected{% endif %}>{{ city.name }}</option>
+              {% endfor %}
+            </select>
+          </div>
         </div>
       </section>
       <section class="container">
@@ -79,13 +78,13 @@
         <div>
           <div class="container--books-category">
             <p>예스24 베스트셀러 Top 5</p>
-              <div class="selectBox">
+              {% comment %} <div class="selectBox">
                 <select name="books" class="select" id="books" onchange="this.form.submit()" style="height: 30px; background-color: white;">
                   <option value="001" {% if selected_book == '001' %}selected{% endif %}>국내도서</option>
                   <option value="002" {% if selected_book == '002' %}selected{% endif %}>외국도서</option>
                   <option value="017" {% if selected_book == '017' %}selected{% endif %}>eBook</option>
                 </select>
-              </div>
+              </div> {% endcomment %}
           </div>
           {% for book in books_list %}
           <div>
@@ -184,15 +183,19 @@
           </div>
         </div>
         <div>
-          {% for info in infos %}
-            <p><a href="{% url 'infobases:detail' info.pk %}">{{ info.title }}</a></p>
-          {% endfor %}
+          <div class="post__list">
+            <h3>정보 게시판</h3>
+            <a href="{% url 'infobases:index' %}">더보기></a>
+          </div> 
+          {% for info in infos|slice:":10" %}
+            <div class="post__list-info">
+              <p class="post__list-title">{{ forloop.counter }}. <a href="{% url 'infobases:detail' info.pk %}">{{ info.title }}({{ info.comment_set.all|length }})</a></p>
+              <p class="post__list-txt">{{ info.created_at|date:"Y-m-d" }}({{ info.views }})</p>
+            </div>
+          {% endfor %}     
         </div>
       </section> 
     </form>
-        </form>
-      </div>
-    </section>
   </article>
 {% comment %} javascript {% endcomment %}
 <script src="{% static '/js/main.js' %}" type="text/javascript"></script>

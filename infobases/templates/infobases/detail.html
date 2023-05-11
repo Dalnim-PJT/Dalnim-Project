@@ -13,14 +13,15 @@
       <div>{{ info.content }}</div>
       <div class="detail--user"> 
         <div class="detail--btn--box">
-          <a href="{% url 'infobases:update' info.pk %}" class="detail--btn">UPDATE</a>
           {% if info.user == request.user %}
+          <a href="{% url 'infobases:update' info.pk %}" class="detail--btn">UPDATE</a>
             <form action="{% url 'infobases:delete' info.pk %}">
               {% csrf_token %}
               <input type="submit" value="DELETE"  class="detail--btn">
             </form>
           {% endif %}
-          <a href="{% url 'infobases:main'%}"  class="detail--btn">MAIN</a>
+          <a href="{% url 'infobases:create'%}"  class="detail--btn">CREATE</a>
+          <a href="{% url 'infobases:index'%}"  class="detail--btn">LIST</a>
         </div>
         <p>작성자 : {{ info.user }}</p>
         <p>작성일 : {{ info.created_at|date:'Y-m-d' }}</p>
@@ -51,8 +52,8 @@
         {% for comment in comments %}
           <div>
             <div>
-              {% comment %} <img src="{% if comment.user.profile_img %}{{ comment.user.profile_img.url }}{% else %}{% static 'img/default_profile_img.jpeg' %}{% endif %}" 
-              alt="{{ comment.user.profile_img.url }}"> {% endcomment %}
+              <img src="{% if comment.user.profile_img %}{{ comment.user.profile_img.url }}{% else %}{% static 'img/default_profile_img.jpeg' %}{% endif %}" 
+              alt="{{ comment.user.profile_img }}" style="width:64px; height:64px;">
               <p>{{ comment.user }}</p>
               <p>{{ comment.content }}</p>
               {% if request.user == comment.user %}

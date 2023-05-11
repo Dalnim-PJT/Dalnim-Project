@@ -1,0 +1,69 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block head %}
+<link rel="stylesheet" href="{% static 'css/index.css' %}">
+{% endblock head %}
+
+{% block style %}
+<style>
+
+</style>
+{% endblock style %}
+
+{% block content %} 
+<article class="article--container">
+  <div class="article--list--title">
+    <h3>정보 게시판</h3>
+    {% if request.user.is_authenticated %}
+      <a href="{% url 'infobases:create' %}">글쓰기</a>
+    {% endif %}
+  </div>
+  <div>
+    <table class="article--list">
+      <thead>
+        <tr>
+          <th scope="col">No</th>
+          <th scope="col">제목</th>
+          <th scope="col">작성자</th> 
+          <th scope="col">작성일</th>
+          <th scope="col">조회수</th>
+          <th scope="col">댓글수</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for info in page_obj %}
+          <tr>
+            <th scope="row">{{ forloop.counter0|add:page_obj.start_index }}</th>
+            <td><a href="{% url 'infobases:detail' info.pk %}">{{ info.title }}</a></td>
+            <td><a href="{% url 'accounts:profile' info.user.username %}">{{ info.user }}</a></td>
+            <td>{{ info.created_at|date:"Y-m-d H:m" }}</td>
+            <td>{{ info.views }}</td>
+            <td>{{ info.comment_set.all|length }}</td>
+          </tr>
+        {% empty %}
+          <h3>게시글이 없습니다.</h3>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+  
+  <div class="pagination">
+    <span class="step-links">
+      {% if page_obj.has_previous %}
+        <a href="?page=1">« first</a>
+        <a href="?page={{ page_obj.previous_page_number }}">previous</a>
+      {% endif %}
+
+      <span class="current-page">{{ page_obj.number }}</span>
+
+      {% if page_obj.has_next %}
+        <a href="?page={{ page_obj.next_page_number }}">next</a>
+        <a href="?page={{ page_obj.paginator.num_pages }}">last »</a>
+      {% endif %}
+    </span>
+  </div>
+
+</article>
+
+{% endblock content %}

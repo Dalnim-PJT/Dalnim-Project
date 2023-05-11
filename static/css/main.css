@@ -477,3 +477,25 @@ footer {
 
 #webtoon--image:hover {
 } */
+
+
+.post__list {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 10px au9-to;
+}
+
+.post__list-title {
+  margin-bottom: 3px;
+}
+
+.post__list-info {
+  width: 90%;
+  margin: auto;
+}
+
+.post__list-txt {
+  font-size: 12px;
+  color: gray;
+}

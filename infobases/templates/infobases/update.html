@@ -1,11 +1,20 @@
 {% extends 'base.html' %}
 
+
+{% block style %}
+<link rel="stylesheet" href="{% static 'css/create.css' %}">
+{% endblock style %}
+
 {% block content %}
-<h1>update</h1>
-<form action="{% url 'infobases:update' info.pk %}" method="post" enctype="multipart/form-data">
-    {% csrf_token %}
-    {{info_form.as_p}}
-    {{image_form.as_p}}
-    <input type="submit" value="수정">
-</form>
+<article>
+  <div>
+    <h1>update</h1>
+    <form action="{% url 'infobases:update' info.pk %}" method="post" enctype="multipart/form-data">
+      {% csrf_token %}
+      {{info_form.as_p}}
+      {{image_form.as_p}}
+      <input type="submit" value="수정">
+    </form>
+  <a href="{% url 'infobases:index'%}">LIST</a></div>
+</article>
 {% endblock content %}

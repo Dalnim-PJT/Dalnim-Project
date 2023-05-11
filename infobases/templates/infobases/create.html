@@ -1,16 +1,21 @@
 {% extends 'base.html' %}
 {% load static %}
 
-{% block style %} 
+{% block style %}
+<link rel="stylesheet" href="{% static 'css/create.css' %}">
 {% endblock style %}
 
 {% block content %}
-<h1>Create</h1>
-<form action="{% url 'infobases:create' %}" method="POST" enctype="multipart/form-data">
-    {% csrf_token %}
-    {{ info_form.as_p }}
-    {{ image_form.as_p }}
-    <input type="submit" value="CREATE">
-</form>
-<a href="{% url 'infobases:main'%}">MAIN</a>
+<article>
+  <div>
+    <h1>Create</h1>
+    <form action="{% url 'infobases:create' %}" method="POST" enctype="multipart/form-data">
+      {% csrf_token %}
+      {{ info_form.as_p }}
+      {{ image_form.as_p }}
+      <input type="submit" value="CREATE">
+    </form>
+    <a href="{% url 'infobases:index'%}">LIST</a>
+  </div>
+</article>
 {% endblock content %}

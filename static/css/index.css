@@ -1,0 +1,48 @@
+.article--container {
+    width: 70%;
+    margin: auto;
+}
+
+.article--list--title {
+  display:flex;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+
+.article--list--title > h3 { 
+  color: rgb(63,73,127);
+}
+
+.article--list--title a {
+  height: 20px;
+}
+
+.article--list {
+    width: 100%;
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+
+.article--list thead th {
+    padding: 0.5rem;
+}
+
+.article--list tbody th,
+.article--list tbody td {
+    border-top: 1px solid black;
+    padding: 0.5rem;
+}
+
+td {
+  text-align: center;
+  border-left:  1px solid black;
+}
+
+thead {
+  background-color: rgb(63,73,127);
+  color: white;
+}
+
+th {
+  border-left:  1px solid black;
+}

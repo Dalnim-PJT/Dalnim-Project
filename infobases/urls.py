@@ -4,6 +4,7 @@ from . import views
 app_name = 'infobases'
 urlpatterns = [
     path('', views.main, name='main'),
+    path('index/', views.index, name='index'),
     path('create/', views.create, name='create'),
     path('<int:infobase_pk>/', views.detail, name='detail'),
     path('<int:infobase_pk>/delete/', views.delete, name='delete'),

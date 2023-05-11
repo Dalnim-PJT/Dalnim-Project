@@ -1,34 +1,35 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
-from utils.weather import weather_json, pm_json
-from utils.news import news
-from utils.youtube import youtube_trending_video
-from utils.melon import get_melon_chart
-from utils.books import books
-from utils.movie import movie
-from utils.webtoon import webtoon
-from .models import Info, Image, Comment
-from .forms import InfoForm, CommentForm, ImageForm
+from django.core.paginator import Paginator
 from django.db.models.signals import pre_save
 from django.dispatch import receiver
-from multiprocessing import Process
+from utils.weather import weather_json, pm_json
+# from utils.books import books
+# from utils.news import news
+# from utils.youtube import youtube_trending_video
+# from utils.melon import get_melon_chart
+# from utils.movie import movie 
+# from utils.webtoon import webtoon
+from .models import Info, Image, Comment
+from .forms import InfoForm, CommentForm, ImageForm
+from .apps import youtube_trending_video_list, news_dict, top_ten_songs, movies, webtoons, books_list
 
 # Create your views here.
 
 def main(request):
-    infos = Info.objects.all()
+    infos = Info.objects.order_by('-pk')
     city_name = request.GET.get('city', 'Seoul')
-    books_category = request.GET.get('books', '001')
+    # books_category = request.GET.get('books', '001')
     weather_api = weather_json(city_name)
     pm_api = pm_json(city_name)
     pm2_5 = pm_api['list'][0]['components']['pm2_5']
     pm10 = pm_api['list'][0]['components']['pm10']
-    news_dict = news()
-    books_list = books(books_category)
-    youtube_trending_video_list = youtube_trending_video()
-    top_ten_songs = get_melon_chart()
-    movies = movie()
-    webtoons = webtoon()
+    # books_list = books(books_category)
+    # news_dict = news()
+    # youtube_trending_video_list = youtube_trending_video()
+    # top_ten_songs = get_melon_chart()
+    # movies = movie()
+    # webtoons = webtoon()
     cities = [ {'name': '서울', 'value': 'Seoul'}, {'name': '부산', 'value': 'Busan'}, {'name': '대구', 'value': 'Daegu'}, {'name': ' 대전', 'value': 'Daejeon'}, {'name': '광주', 'value': 'Gwangju'}, {'name': '인천', 'value': 'Incheon'}, {'name': '제주', 'value': 'Jeju' }, {'name': '런던', 'value': 'london'}, {'name': '베이징', 'value': 'beijing'}, {'name': '도쿄', 'value': 'tokyo'}, {'name': '방콕' , 'value': 'bangkok'}, {'name': '시드니', 'value': 'sydney'}, {'name': '토론토', 'value': 'toronto'}, {'name': '뉴욕', 'value': 'new york'} , {'name': '암스테르담', 'value': 'Amsterdam'}, {'name': '베를린', 'value': 'Berlin'}, {'name': '부다페스트', 'value': 'Budapest'}, {'name': '카이로', 'value': 'Cairo'}, {'name': '캔버라', 'value': 'Canberra'}, {'name': '두바이', 'value': 'Dubai'}, {'name': '로마', 'value': 'Rome'}, { 'name': '싱가폴', 'value': 'Singapore'}, {'name': '파리', 'value': 'Paris'}, {'name': '마닐라', 'value': 'Manila'}, {'name': '홍콩', 'value': 'Hong Kong'}, {'name': '하노이', 'value': 'Hanoi'}]
     
     # 미세먼지 수치
@@ -70,20 +71,20 @@ def main(request):
         'icon': f"https://openweathermap.org/img/wn/{weather_api['weather'][0]['icon']}@2x.png",    # 날씨 아이콘
         'fine_dust': fine_dust,              # 미세먼지
         'ultrafine_dust': ultrafine_dust,          # 초미세먼지
-        'news_dict': news_dict,
-        'cities': cities,
-        'youtube_trending_video_list': youtube_trending_video_list,
-        'top_ten_songs': top_ten_songs,
-        'books_list': books_list,
-        'movies' : movies,
-        'webtoons' : webtoons,
+        'news_dict': news_dict,             # 뉴스
+        'cities': cities,                   # 도시
+        'youtube_trending_video_list': youtube_trending_video_list,     # 유튜브 Top5
+        'top_ten_songs': top_ten_songs,         # 멜론 Top10
+        'books_list': books_list,           # 예스24 Top5
+        'movies' : movies,              # CGV Top10
+        'webtoons' : webtoons,          # 탑툰 Top5
         'infos': infos,
     }
 
     if city_name:
         context['selected_city'] = city_name
-    if books_category:
-        context['selected_book'] = books_category
+    # if books_category:
+    #     context['selected_book'] = books_category
     return render(request, 'infobases/main.html', context)
 
 
@@ -148,7 +149,7 @@ def update(request, infobase_pk):
         if request.method == 'POST':
             info_form = InfoForm(request.POST, instance=info)
             files = request.FILES.getlist('image')
-            if form.is_valid():
+            if info_form.is_valid():
                 form = info_form.save(commit=False)
                 form.user = request.user
                 form.save()
@@ -202,3 +203,12 @@ def increment_view_count(sender, instance, **kwargs):
     if old_instance.views != instance.views:
         instance.views = old_instance.views + 1
 
+
+def index(request):
+    infos = Info.objects.order_by('-pk')
+    # page = request.GET.get('page', '1')
+    paginator = Paginator(infos, 10)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+
+    return render(request, 'infobases/index.html', {'page_obj':page_obj,})

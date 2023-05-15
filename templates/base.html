@@ -43,9 +43,9 @@
             </div>
             <div>
               <ul id="menu">
-                <li><a href="">문지수</a></li>
-                <li><a href="">소현섭</a></li>
-                <li><a href="">정미영</a></li>
+                <li><a href="{% url 'infobases:create' %}">문지수</a></li>
+                <li><a href="{% url 'infobases:create' %}">소현섭</a></li>
+                <li><a href="{% url 'infobases:create' %}">정미영</a></li>
                 <li><a href="{% url 'infobases:create' %}">정소담</a></li>
               </ul>
             </div>
@@ -53,7 +53,7 @@
         </div>
       </nav>
     </header>
-    <main class="item">
+    <main class="width">
     {% block content %} 
     {% endblock content %}
     </main>

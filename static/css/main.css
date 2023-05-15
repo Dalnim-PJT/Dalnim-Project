@@ -1,10 +1,9 @@
-
 .main--color {
   border-color: rgb(63,73,127);
   height: 30px;
 }
 
-article {
+.main--container {
   /* display: grid; */
   width: 100%;
   padding-bottom: 100px;
@@ -24,13 +23,14 @@ section {
 .newsandweather__container {
   display: grid;
   grid-template-columns: 1fr;
+  width: 100%;
   
 }
 
 /* 1320px 이상일 때 2분할 */
 @media screen and (min-width: 1320px) {
   .newsandweather__container {
-    grid-template-columns: 50% 50%;
+    grid-template-columns: 1fr 1fr;
   }
 }
 
@@ -82,21 +82,68 @@ section {
 .container {
   display: grid;
   grid-template-columns: 1fr;   
-  grid-gap: 10px;
+  grid-gap: 2rem;
+  margin: 2rem 0;
 }
 
 /* 768px ~ 1024px 일 때 2분할 */
 @media screen and (min-width: 768px) {
   .container {
-    grid-template-columns: 1fr 1fr;   
+    grid-template-columns: 1fr;   
   }
 }
 
 /* 1024px 이상일 때 3분할 */
-@media screen and (min-width: 1024px) {
+@media screen and (min-width: 1350px) {
+  .container {
+    grid-template-columns: 1fr 1fr;   
+  }
+  .item-1 {
+    order: 1;
+  }
+  .item-2 {
+    order: 3;
+  }
+  .item-3 {
+    order: 4;
+  }
+  .item-4 {
+    order: 6;
+  }
+  .item-5 {
+    order: 5;
+  }
+  .item-6 {
+    order: 2;
+  }
+}
+
+@media screen and (min-width: 1650px) {
   .container {
     grid-template-columns: 1fr 1fr 1fr;   
   }
+  .item-1 {
+    order: 2;
+  }
+  .item-2 {
+    order: 1;
+  }
+  .item-3 {
+    order: 3;
+  }
+  .item-4 {
+    order: 4;
+  }
+  .item-5 {
+    order: 6;
+  }
+  .item-6 {
+    order: 5;
+  }
+}
+
+.main--list--title {
+  margin-bottom: 0.5rem;
 }
 
 .container > div {
@@ -117,6 +164,7 @@ section {
   display: flex;
   flex-direction: column;
   justify-content: center;
+  overflow: hidden;
   
 }
 
@@ -272,6 +320,7 @@ footer {
 .melon__image {
   width:70px; 
   height:70px;
+  border: 1px solid black;
 }
 
 .slide1,
@@ -373,7 +422,6 @@ footer {
   overflow: hidden;
   width: 400px;
   height: 570px;
-  border: 1px solid #000;
   margin: auto;
 }
 .embla__container {
@@ -434,12 +482,16 @@ footer {
 
 /* webtoon section */
 .webtoon--section {
+  display: flex;
+  justify-content: center;
+  overflow: hidden;
+  width: 400px;
+  height: 570px;
+  margin: auto;
   white-space: nowrap;
 }
 .webtoon--container {
-  width: 300px;
   overflow: hidden;
-
 }
 .webtoon--wrap{
   display: inline-block;
@@ -450,25 +502,44 @@ footer {
 /* .webtoon--position{
   position: absolute;
 } */
-/* .webtoon__rank{
-  width: 20px;
-  height: 20px;
-  background-color: #fff;
-} */
+.webtoon__rank{
+  position: absolute;
+  bottom: 0;
+  left: 20px;
+  font-size: 45px;
+  color: white;
+  font-style: oblique;
+  z-index: 1;
+}
+.webtoon__txt {
+  width: 100%;
+  text-align: center;
+  margin-bottom: 20px;
+}
 .webtoon__title{
-  bottom: 60px;
-  left: 15px;
-  background-color: #fff;
+  width: 80%;
+  margin: auto;
+  font-size: 22px;
+  text-align: center;
+  color: rgb(63,73,127);
+  font-weight: 700;
+}
+.webtoon__info {
+  display: flex;
+  font-size: 12px;
+  color: gray;
+  width: 50%;
+  margin: auto;
+  justify-content: center;
+  align-items: center;
 }
 .webtoon__auth{
-  bottom: 40px;
-  left: 15px;
+  margin-right: 5px;
   background-color: #fff;
 }
 
 .webtoon__veiw{
-  bottom: 20px;
-  left: 15px;
+  margin-left: 5px;
   background-color: #fff;
 }
 /* 
@@ -483,7 +554,7 @@ footer {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin: 10px au9-to;
+  /* margin: 10px auto; */
 }
 
 .post__list-title {

@@ -90,3 +90,30 @@ article {
   margin-bottom: 1rem;
 
 }
+
+.detail--comment--box {
+  display: flex;
+  align-items: center;
+}
+
+.detail--comment--img {
+  padding: 3px;
+}
+
+.detail--comment--img img {
+  border-radius: 50%;
+}
+
+.detail--comment--content {
+  width: 100%;
+  padding: 3px;
+}
+
+h4 {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+#id_content {
+  width: 100%;
+}

@@ -47,7 +47,7 @@ def join(request):
 
 
 def delete(request):
-    if request.user_is_authenticated:
+    if request.user.is_authenticated:
         request.user.delete()
         auth_logout(request)
     return redirect('infobases:main')

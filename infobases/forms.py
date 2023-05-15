@@ -25,6 +25,6 @@ class CommentForm(forms.ModelForm):
         widget=forms.TextInput(
             attrs={
                 'class': 'form-control', 
-                'style': 'width: 374.4px'
+
             })
     )

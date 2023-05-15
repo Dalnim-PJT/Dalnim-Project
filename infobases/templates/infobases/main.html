@@ -9,7 +9,7 @@
 {% endblock style %}
 
 {% block content %}
-  <article>
+  <article class="main--container">
     <form action="{% url 'infobases:main' %}" method="GET">
       <section class="newsandweather__container">
         <div class="slideshow--container">
@@ -66,18 +66,18 @@
         </div>
       </section>
       <section class="container">
-        <div>
-          <p>유튜브 인기 급상승 Top 5</p>
+        <article class="item-1">
+          <h3 class="main--list--title">유튜브 인기 급상승 Top 5</h3>
           <iframe width="560" height="315" 
           src={{ youtube_trending_video_list }}
           title="YouTube video player" 
           frameborder="0" 
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
           allowfullscreen></iframe>
-        </div>
-        <div>
+        </article>
+        <article class="item-2">
           <div class="container--books-category">
-            <p>예스24 베스트셀러 Top 5</p>
+            <h3 class="main--list--title">예스24 베스트셀러 Top 5</h3>
               {% comment %} <div class="selectBox">
                 <select name="books" class="select" id="books" onchange="this.form.submit()" style="height: 30px; background-color: white;">
                   <option value="001" {% if selected_book == '001' %}selected{% endif %}>국내도서</option>
@@ -98,9 +98,9 @@
             </a>
           </div>
           {% endfor %}
-        </div>
-        <div>
-          <p>멜론 Top 10</p>
+        </article>
+        <article class="item-3">
+          <h3 class="main--list--title">멜론 Top 10</h3>
           <div>
             <div class="slide1">
               {% for song in top_ten_songs|slice:":5" %}
@@ -127,9 +127,9 @@
               {% endfor %}  
             </div>
           </div>
-        </div>
-        <div>
-          <p>CGV Top 10</p>
+        </article>
+        <article class="item-4">
+          <h3 class="main--list--title">CGV Top 10</h3>
           <div class="embla">
             <div class="embla__container">
               {% for rank,movie in movies.items %}
@@ -165,35 +165,43 @@
               {% endfor %}
             </div>
           </div>
-        </div>
+        </article>
         <!-- webtoon -->
-  
-         <div class="webtoon--section">
-          <p>탑툰 Top 5</p>
-          <div id="webtoon-carousel" class="webtoon--container">
+        <article class="item-5">
+          <h3 class="main--list--title">탑툰 Top 5</h3>
+          <div class="webtoon--section">
+            <div id="webtoon-carousel" class="webtoon--container">
             {% for rank, webtoon in webtoons.items %}
             <ul class="webtoon--wrap">
-              <li class="webtoon--position webtoon__rank rank">{{ rank }}</li>
-              <li><img id="webtoon--image" src="{{ webtoon.0 }}" alt="img"></li>
-              <li class="webtoon--position webtoon__title">{{ webtoon.1 }}</li>
-              <li class="webtoon--position webtoon__auth">{{ webtoon.2 }}</li>
-              <li class="webtoon--position webtoon__veiw">{{ webtoon.3 }}</li>
+              <div class="poster">
+                <span class="webtoon--position webtoon__rank">{{ rank }}</span>
+                <img id="webtoon--image" src="{{ webtoon.0 }}" alt="img">
+              </div>
+              <div class="webtoon__txt">
+                <li class="webtoon--position webtoon__title">{{ webtoon.1 }}</li>
+                <div class="webtoon__info">
+                  <span class="webtoon--position webtoon__auth">{{ webtoon.2 }}</span>
+                  <div>|</div>
+                  <span class="webtoon--position webtoon__veiw">{{ webtoon.3 }}</span>
+                </div>
+              </div>
             </ul>
             {% endfor %}
+            </div>
           </div>
-        </div>
-        <div>
+        </article>
+        <article class="item-6">
           <div class="post__list">
-            <h3>정보 게시판</h3>
+            <h3 class="main--list--title">정보 게시판</h3>
             <a href="{% url 'infobases:index' %}">더보기></a>
           </div> 
-          {% for info in infos|slice:":10" %}
+          {% for info in infos|slice:":5" %}
             <div class="post__list-info">
               <p class="post__list-title">{{ forloop.counter }}. <a href="{% url 'infobases:detail' info.pk %}">{{ info.title }}({{ info.comment_set.all|length }})</a></p>
               <p class="post__list-txt">{{ info.created_at|date:"Y-m-d" }}({{ info.views }})</p>
             </div>
           {% endfor %}     
-        </div>
+        </article>
       </section> 
     </form>
   </article>

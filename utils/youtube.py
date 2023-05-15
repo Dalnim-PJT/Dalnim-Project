@@ -19,7 +19,7 @@ def youtube_trending_video():
     else:
         print('API 요청 실패')
     
-    return random.choice(youtube_trending_video_list)
+    return youtube_trending_video_list
 
 
 with open('etc/youtube_apikey.txt') as f:

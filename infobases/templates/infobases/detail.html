@@ -41,25 +41,30 @@
   </section>
   
   <section class="detail--comment--container">
-    <form action="{% url 'infobases:comments_create' info.pk %}" method="POST">
-      {% csrf_token %}
-      {{ comment_form }}
-      <input type="submit" value="댓글작성">
-    </form>
+    {% if user.is_authenticated %}
+      <form action="{% url 'infobases:comments_create' info.pk %}" method="POST" style="width:100%;">
+        {% csrf_token %}
+        {{ comment_form }}
+        <input type="submit" value="댓글작성">
+      </form>
+    {% endif %}
     <h4>Comment({{comments|length}})</h4>
     <div class="detail--comment">
       {% if comments %}
         {% for comment in comments %}
-          <div>
-            <div>
+          <div class="detail--comment--box">
+            <div class="detail--comment--img">
               <img src="{% if comment.user.profile_img %}{{ comment.user.profile_img.url }}{% else %}{% static 'img/default_profile_img.jpeg' %}{% endif %}" 
               alt="{{ comment.user.profile_img }}" style="width:64px; height:64px;">
-              <p>{{ comment.user }}</p>
-              <p>{{ comment.content }}</p>
+            </div> 
+            <div class="detail--comment--content">
+              <span>{{ comment.user }}</span>
+              <hr>
+              <span>{{ comment.content }}</span>
               {% if request.user == comment.user %}
                 <a href="{% url 'infobases:comments_delete' info.pk comment.pk %}"  class="detail--btn">삭제</a>
               {% endif %}
-            </div> 
+            </div>
           </div>
         {% endfor %}
       {% else %}

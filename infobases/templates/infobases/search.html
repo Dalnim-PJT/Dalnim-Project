@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block head %}
+<link rel="stylesheet" href="{% static 'css/search.css' %}">
+{% endblock head %}
+
+{% block content %}
+
+<h1>{{ query }} 검색 결과</h1>
+
+{% if infos %}
+  {% for info in infos %}
+    <div class="info--box">
+      <div>
+        {{ info.title }}
+      </div>
+      <div>
+        {{ info.content }}
+      </div>
+    </div>
+    
+  {% endfor %}
+{% else %}
+  검색결과 없음
+{% endif %}
+
+{% endblock content %}

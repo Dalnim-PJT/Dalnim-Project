@@ -9,6 +9,7 @@ from .models import Info, Image, Comment
 from .forms import InfoForm, CommentForm, ImageForm
 from .apps import youtube_trending_video_list, news_dict, top_ten_songs, movies, webtoons, books_list
 import random
+from django.db.models import Q
 
 # Create your views here.
 
@@ -202,3 +203,16 @@ def index(request):
     page_obj = paginator.get_page(page_number)
 
     return render(request, 'infobases/index.html', {'page_obj':page_obj,})
+
+
+def search(request):
+    query = request.GET.get('q')
+
+    if query:
+        infos = Info.objects.filter(Q(title__icontains=query) | Q(content__icontains=query))
+
+        context = {'query':query, 'infos':infos,}
+    else:
+        context = {}
+
+    return render(request, 'infobases/search.html', context)

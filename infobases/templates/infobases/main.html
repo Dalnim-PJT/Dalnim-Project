@@ -68,7 +68,8 @@
       <section class="container">
         <article class="item-1">
           <h3 class="main--list--title">유튜브 인기 급상승 Top 5</h3>
-          <iframe width="560" height="315" 
+          {% comment %} width="560" height="315" {% endcomment %}
+          <iframe width="100%" height="100%" 
           src={{ youtube_trending_video_list }}
           title="YouTube video player" 
           frameborder="0" 
@@ -169,24 +170,39 @@
         <!-- webtoon -->
         <article class="item-5">
           <h3 class="main--list--title">탑툰 Top 5</h3>
-          <div class="webtoon--section">
-            <div id="webtoon-carousel" class="webtoon--container">
-            {% for rank, webtoon in webtoons.items %}
-            <ul class="webtoon--wrap">
-              <div class="poster">
-                <span class="webtoon--position webtoon__rank">{{ rank }}</span>
-                <img id="webtoon--image" src="{{ webtoon.0 }}" alt="img">
-              </div>
-              <div class="webtoon__txt">
-                <li class="webtoon--position webtoon__title">{{ webtoon.1 }}</li>
-                <div class="webtoon__info">
-                  <span class="webtoon--position webtoon__auth">{{ webtoon.2 }}</span>
-                  <div>|</div>
-                  <span class="webtoon--position webtoon__veiw">{{ webtoon.3 }}</span>
+          <div class="w_embla">
+            <div class="embla__container">
+              {% for rank, webtoon in webtoons.items %}
+                <div class="embla__slide">
+                  <div class="w_poster">
+                    <div class="rank">
+                      <span>{{ rank }}</span>
+                    </div>
+                    <img src="{{ webtoon.0 }}" alt="" class="poster-img">
+                    <div class="w_movieChart_btn_wrap">
+                      <a href="{{ webtoon.4 }}" class="movie-info-btn" >상세보기</a>
+                      <!-- <a href="{{ movie.6 }}" class="movie-ticketing-btn">예매하기</a> -->
+                    </div>
+                  </div>
+                  <div class="movie-txt">
+                    <div>
+                      <a href="{{ webtoon.4 }}" class="movie-title">
+                        <span class="movie-title">{{ webtoon.1 }}</span>
+                      </a>
+                    </div>
+                    <div class="movie-info">
+                      <div class="rating">
+                        <!-- <img src="{{ movie.2 }}" alt=""> -->
+                        <p>{{ webtoon.2 }}</p>
+                      </div>
+                      <div>|</div>
+                      <div class="ticketing">
+                        <p>{{ webtoon.3 }}</p>
+                      </div>
+                    </div>
+                  </div>
                 </div>
-              </div>
-            </ul>
-            {% endfor %}
+              {% endfor %}
             </div>
           </div>
         </article>

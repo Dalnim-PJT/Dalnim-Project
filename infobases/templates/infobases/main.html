@@ -77,28 +77,29 @@
           allowfullscreen></iframe>
         </article>
         <article class="item-2">
-          <div class="container--books-category">
-            <h3 class="main--list--title">예스24 베스트셀러 Top 5</h3>
-              {% comment %} <div class="selectBox">
-                <select name="books" class="select" id="books" onchange="this.form.submit()" style="height: 30px; background-color: white;">
-                  <option value="001" {% if selected_book == '001' %}selected{% endif %}>국내도서</option>
-                  <option value="002" {% if selected_book == '002' %}selected{% endif %}>외국도서</option>
-                  <option value="017" {% if selected_book == '017' %}selected{% endif %}>eBook</option>
-                </select>
-              </div> {% endcomment %}
-          </div>
-          {% for book in books_list %}
-          <div>
-            <a href="{{ book.book_link }}" class="container--books">
-              {% comment %} <span class="container--books-rank">{{ book.book_rank }}</span> {% endcomment %}
-              <img src="{{ book.book_img_link }}" alt="{{ book.book_name }}" class="container--books-img">
+          <h3 class="main--list--title">예스24 베스트셀러 Top 5</h3>
+            {% comment %} <div class="selectBox">
+              <select name="books" class="select" id="books" onchange="this.form.submit()" style="height: 30px; background-color: white;">
+                <option value="001" {% if selected_book == '001' %}selected{% endif %}>국내도서</option>
+                <option value="002" {% if selected_book == '002' %}selected{% endif %}>외국도서</option>
+                <option value="017" {% if selected_book == '017' %}selected{% endif %}>eBook</option>
+              </select>
+            </div> {% endcomment %}
+            <div>
               <div>
-                <span class="container--books--book_name">{{ book.book_rank }}위 {{ book.book_name }}</span><br>
-                <span class="container--books--book_author">{{ book.book_author }}</span>
+                {% for book in books_list %}
+                  <div class="container--melon">
+                    <a href="{{ book.book_link }}">
+                      <img src="{{ book.book_img_link }}" alt="{{ book.book_name }}" class="melon__image">
+                    </a>
+                    <div class="container--melon__info">
+                      <span class="container--melon__title">{{ book.book_rank }}위 {{ book.book_name }}</span><br>
+                      <span class="container--melon__artist_album">{{ book.book_author }}</span>
+                    </div>
+                  </div>
+                {% endfor %}
               </div>
-            </a>
-          </div>
-          {% endfor %}
+            </div>
         </article>
         <article class="item-3">
           <h3 class="main--list--title">멜론 Top 10</h3>
@@ -211,7 +212,7 @@
             <h3 class="main--list--title">정보 게시판</h3>
             <a href="{% url 'infobases:index' %}">더보기></a>
           </div> 
-          {% for info in infos|slice:":5" %}
+          {% for info in infos|slice:":10" %}
             <div class="post__list-info">
               <p class="post__list-title">{{ forloop.counter }}. <a href="{% url 'infobases:detail' info.pk %}">{{ info.title }}({{ info.comment_set.all|length }})</a></p>
               <p class="post__list-txt">{{ info.created_at|date:"Y-m-d" }}({{ info.views }})</p>

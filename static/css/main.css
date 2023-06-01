@@ -301,12 +301,17 @@ footer {
 .container--melon {
   display: flex;
   margin: 5px;
+  border-radius: 10px;
   background-color: #fff;
-  box-shadow: 0px -2px 5px 2px rgba(204,204,204, .5);
+  box-shadow: 2px 2px 2px 2px rgba(204,204,204, .5);
+  margin-bottom: 0.2rem;
 }
-
+.melon__image {
+  margin: 0.4rem;
+}
 .container--melon__info {
   margin-left: 5px;
+  margin-top: 0.4rem;
 }
 
 .container--melon__title {

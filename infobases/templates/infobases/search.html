@@ -6,22 +6,25 @@
 
 {% block content %}
 
-<h1>{{ query }} 검색 결과</h1>
-
-{% if infos %}
-  {% for info in infos %}
-    <div class="info--box">
-      <div>
-        <p>제목: {{ info.title }}</p>
+<div class="search--container">
+  
+  {% if infos %}
+  <h1>'{{ query }}' 검색 결과</h1>
+    {% for info in infos %}
+      <div class="info--box">
+        <a href="{% url 'infobases:detail' info.pk %}">
+          <div>
+            <p>제목: {{ info.title }}</p>
+            <p>내용: {{ info.content }}</p>
+          </div>
+        </a>
       </div>
-      <div>
-        <p>내용: {{ info.content }}</p>
-      </div>
-    </div>
-    
-  {% endfor %}
-{% else %}
-  검색결과 없음
-{% endif %}
+    {% endfor %}
+  {% else %}
+  <div class="none--content">
+    검색결과 없음
+  </div>
+  {% endif %}
+</div>
 
 {% endblock content %}

@@ -8,23 +8,35 @@
 {% block content %}
   <div class="profile--container">
     <div class="profile--wrap">
-      <h1>
-        {{ person.username }}님의 프로필 페이지
-      </h1>
-      <div >
+      <div>
         <img src="{% if person.profile_img %}{{ person.profile_img.url }}{% else %}{% static 'img/default_profile_img.jpeg' %}{% endif %}" alt="" class="profile--img">
       </div>
-        
-      <p class="profile--txt">이메일: {{ person.email }}</p>
+      <table>
+        <tr>
+          <th class="table--header">이메일</th>
+          <td class="table--data">{{ person.email }}</td>
+        </tr>
+        <tr>
+          <th class="table--header">이름</th>
+          <td class="table--data">{{ person.last_name }}{{ person.first_name }}</td>
+        </tr>
+        <tr>
+          <th class="table--header">생년월일</th>
+          <td class="table--data">{{ person.birthday }}</td>
+        </tr>
+      </table>
+      {% comment %} <p class="profile--txt">이메일: {{ person.email }}</p>
       <p class="profile--txt">이름: {{ person.last_name }}{{ person.first_name }}</p>
-      <p class="profile--txt">생년월일: {{ person.birthday }}</p>
-      {% if request.user == person %}
-        <a href="{% url 'accounts:update' %}" class="input_btn">수정</a>
-        <form action="{% url 'accounts:delete' %}" method="POST">
-          {% csrf_token %}
-          <input type="submit" value="탈퇴" class="input_btn">
-        </form>
-      {% endif %}
+      <p class="profile--txt">생년월일: {{ person.birthday }}</p> {% endcomment %}
+      <div style="padding-top: 5px;">
+        {% if request.user == person %}
+          <a href="{% url 'accounts:update' %}" class="input_btn">수정</a>
+          <form action="{% url 'accounts:delete' %}" method="POST">
+            {% csrf_token %}
+            <input type="submit" value="탈퇴" class="input_btn">
+          </form>
+        {% endif %}
+      </div>
       <h3 class="profile--table--title">{{ person.username }} 님이 작성한 모든 게시글</h3>
       <table class="profile--article--list">
         <thead>

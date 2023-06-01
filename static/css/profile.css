@@ -54,3 +54,13 @@ thead {
 th {
   border-left:  1px solid black;
 }
+
+.table--header {
+  background-color: rgb(63,73,127);
+  color: white;
+  width: 100px;
+}
+
+.table--data {
+  width: 292px;
+}

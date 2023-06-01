@@ -7,15 +7,21 @@
 
 {% block content %}
 <article>
-  <div>
-    <h1>Create</h1>
-    <form action="{% url 'infobases:create' %}" method="POST" enctype="multipart/form-data">
-      {% csrf_token %}
-      {{ info_form.as_p }}
-      {{ image_form.as_p }}
-      <input type="submit" value="CREATE">
-    </form>
-    <a href="{% url 'infobases:index'%}">LIST</a>
+  <div class="create--wrap">
+    <div>
+      <div class="create--title--wrap">
+        <h1 class="dalnim--color">게시글 작성</h1>
+        <a class="dalnim--color" href="{% url 'infobases:index'%}">LIST</a>
+      </div>
+      <form action="{% url 'infobases:create' %}" method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ info_form.as_p }}
+        {{ image_form.as_p }}
+        <div class="dalnim--button--wrap">
+          <input class="dalnim--button" type="submit" value="게시글 등록">
+        </div>
+      </form>
+    </div>
   </div>
 </article>
 {% endblock content %}
